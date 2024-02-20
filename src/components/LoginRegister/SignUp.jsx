@@ -1,62 +1,112 @@
-import { useState } from "react";
-import { usuarios } from "./usuario";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import registerService from "../../services/registrarUsuario";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
-const SignUp = ({isLogin,setIsLogin}) => {
-    const [user,setUser] = useState('');
-    const [password,setPassword] = useState('');
+const SignUp = () => {
 
-    console.log(usuarios)
+    const {handleSubmit, register, errors} = useForm();
 
+    const navigate = useNavigate();
 
-    const submitForm = (event)=>{
-        event.preventDefault();
-        let texto = `Usuario: ${user} Contraseña:${password}`;
-        console.log(texto);
+    const notify = ()=>{
+        toast.success("Registro exitoso!",
+        {position:"top-right",autoClose: 2000,onClose:()=>navigate("/login")});
+    }
 
-        
+    const onSubmit = values =>{
 
-        //Llamado al API y validacion de datos
+        registerService(values)
+        .then((response) => {
+            notify();
+        })       
 
     }
+
+    const handleClick = ()=>{
+        navigate("/login");
+    }
+
+    useEffect(()=>{
+        console.log("Montando")
+    },[])
+
   return (
-    <div className="homeLoginRegister">
-        <div className="containerFormRegister">
-            <form action="" className="formLoginRegister" onSubmit={submitForm}>
+    <>
+    <div className="containerFormRegister">
+            <form action="" className="formLoginRegister" onSubmit={handleSubmit(onSubmit)}>
                 <h2>Sign Up</h2>
                 <div className="containerInputs">
+
                     <div className="divInput">
-                        <input type="text" className="form__input" id="name" placeholder="nombre" required="" />
-                        <label htmlFor="user" className="form__label">Nombre</label>
+                        <input 
+                            type="text" 
+                            className="form__input" 
+                            placeholder="nombre" 
+                            {...register("nombre")}
+                            // ref={register({ required: 'This is required' })}
+                        />
+                        {/* <ErrorMessage errors={errors} name='username' as="small"/> */}
+                        <label className="form__label">Nombre</label>
                     </div>
+
                     <div className="divInput">
-                        <input type="text" className="form__input" id="name" placeholder="apellido" required="" />
-                        <label htmlFor="user" className="form__label">Apellido</label>
+                        <input 
+                            type="text" 
+                            className="form__input" 
+                            placeholder="apellido" 
+                            name="apellido" 
+                            {...register("apellido")}
+                        />
+                        {/* <ErrorMessage errors={errors} name='username' as="small"/> */}
+                        <label className="form__label">Apellido</label>
                     </div>
+
                     <div className="divInput">
-                        <input type="text" className="form__input" id="name" placeholder="example@example.com" required="" />
-                        <label htmlFor="user" className="form__label">Correo</label>
-                    </div>
-                    <div className="divInput">
-                        <input type="text" className="form__input" id="name" placeholder="password" required="" />
+                        <input 
+                            type="password" 
+                            className="form__input" 
+                            placeholder="contraseña" 
+                            {...register("contraseña")}
+                        />
                         <label htmlFor="password" className="form__label">Contraseña</label>
                     </div>
+
                     <div className="divInput">
-                        <input type="text" className="form__input" id="name" placeholder="re-password" required="" />
-                        <label htmlFor="password" className="form__label">Confirmar Contraseña</label>
+                        <input 
+                            type="text" 
+                            className="form__input" 
+                            placeholder="example@example.com" 
+                            {...register("email")}
+                        />
+                        <label htmlFor="user" className="form__label">Correo</label>
                     </div>
-                </div>
-                <div>
-                    {}
+
+                    <div className="divInput">
+                        <input 
+                            className="form__input" 
+                            placeholder="cedula" 
+                            type="number"
+                            {...register("cedula", {
+                                setValueAs: v => parseInt(v),
+                            })}
+                        />
+                        <label htmlFor="password" className="form__label">Cedula</label>
+                    </div>
+                    
+
                 </div>
                 <div className="divButtons">
-                    <button type="submit" className="buttonSignUp">Sign Up</button>
-                    <button type="button" className="buttonSignIn"
-                    onClick={()=>{setIsLogin(!isLogin)}}
-                    >Sign In</button>
+                    <button type="submit" className="primaryButton">Sign Up</button>
+                    <button type="button" className="secondaryButton" onClick={handleClick}>Sign In</button>
                 </div>
             </form>
         </div>
-    </div>
+        <ToastContainer/>
+        </>
   )
 }
 
