@@ -1,0 +1,73 @@
+.containerHoras{
+    position: absolute;
+    background-color: rgba(0,0,0,0.7);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.containerHoras .horas{
+    padding: 60px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    align-items: center;
+    gap: 10px;
+
+    align-items: center;
+    justify-content: center;
+    /* justify-content: space-around; */
+    /* padding: 10px 0px; */
+    flex: 5;
+}
+
+.containerHoras .horas span{
+    cursor: pointer;
+    color: black;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+}
+
+.containerHoras .saveDiv{
+    flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerHoras .saveDiv button{
+    cursor: pointer;
+    color: black;
+    /* padding: 10px 20px; */
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.containerHoras .saveDiv button:hover{
+    /* background-color: #d4d4d4; */
+
+    background-color: #462ee5;
+    box-shadow: 0px 15px 20px rgba(83, 46, 229, 0.2);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.containerHoras .horas span:hover{
+    background-color: #d4d4d4;
+}

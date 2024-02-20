@@ -23,7 +23,7 @@ const SignIn = () => {
     }
     const notifySuccess = ()=>{
         toast.success("Login exitoso!",
-        {position:"top-right",autoClose: 2000,onClose:()=>navigate("/home")});
+        {position:"top-right",autoClose: 2000,onClose:()=>navigate("/home/reserva")});
     }
 
 

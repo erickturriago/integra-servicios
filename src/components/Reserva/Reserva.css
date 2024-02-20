@@ -1,0 +1,21 @@
+:root {
+    --gridList-column: 280px;
+    --gridList-rows: 320px;
+    --gridList-gap: 25px
+}
+
+
+.containerReservas{
+    display: grid;
+    /* width: 120px; */
+    min-height: 100vh;
+    grid-template-columns: repeat(auto-fit, minmax(var(--gridList-column), 1fr));
+    grid-auto-rows: var(--gridList-rows);
+    grid-template-rows: masonry;
+    grid-auto-flow: row dense;
+    grid-gap: var(--gridList-gap, 6px);
+    gap: var(--gridList-gap, 6px);
+    align-items: center;
+    padding: 30px 20px;
+    background-color: rgb(235, 235, 235);
+}

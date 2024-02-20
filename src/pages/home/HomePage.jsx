@@ -1,8 +1,10 @@
-import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div className='home'>
+        <Outlet/>
+    </div>
   )
 }
 

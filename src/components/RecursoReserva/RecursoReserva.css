@@ -1,0 +1,67 @@
+
+.recurso .recursoImage img{
+    width: 150px;
+    height: 100px;
+}
+
+
+.recurso{
+    --gifShadow-size : var(--gridList-gap, 6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .5em;
+    position: relative;
+    height: 100%;
+    background-color: #ffffff;
+    /* border: 1px solid black; */
+    box-shadow: 0px 5px 15px -3px rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.recurso .recursoTitulo{
+    width: 100%;
+    height: auto;
+    background-color: #474F7A;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.recurso .recursoTitulo h3{
+    color: white;
+}
+
+.recurso .recursoOptions{
+    display: flex;
+    justify-content: center;
+    padding: 0px 0px 20px 0px;
+}
+
+.recurso .recursoOptions button {
+    width: 140px;
+    height: 45px;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: "Monserrat",sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.recurso .recursoOptions button:hover {
+    background-color: #462ee5;
+    box-shadow: 0px 15px 20px rgba(83, 46, 229, 0.2);
+    color: #fff;
+    transform: translateY(-3px);
+}
