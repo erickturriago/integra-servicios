@@ -1,16 +1,24 @@
 
 import { useState } from 'react'
 import './App.css'
-import SignIn from './components/LoginRegister/SignIn';
-import SignUp from './components/LoginRegister/SignUp';
-import RegisterPage from './pages/register/RegisterPage';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/home/HomePage';
 import NavBar from './components/NavBar/NavBar';
 import Prestamo from './components/Prestamo/Prestamo';
 import Reserva from './components/Reserva/Reserva';
+import RegisterPage from './pages/register/RegisterPage';
 
 function App() {
+
+  const [formRegisterData,setForRegisterData]=useState({
+    'nombre':'',
+    'apellido':'',
+    'email':'',
+    'cedula':'',
+    'contraseña':'',
+  })
 
   return (
     <>
@@ -18,10 +26,9 @@ function App() {
         <Routes>
 
           <Route path='/' element={<Navigate to="/login"/>}/>
-
           <Route path='/' element={<RegisterPage/>}>
             <Route path='login' element={<SignIn/>}/>
-            <Route path='register' element={<SignUp/>}/>
+            <Route path='register' element={<SignUp formData={formRegisterData} setFormData={setForRegisterData}/>}/>
           </Route>
 
           <Route path="home" element={<NavBar/>}>

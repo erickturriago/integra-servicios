@@ -7,7 +7,7 @@ import { Navigate,useNavigate } from 'react-router-dom';
 
 import inicioSesionService from "../../services/iniciarSesionUsuario";
 
-const SignIn = () => {
+const SignIn = ({formData,setFormData}) => {
 
 
     const {handleSubmit, register, errors} = useForm();
@@ -55,27 +55,18 @@ const SignIn = () => {
                     <h2>Sign In</h2>
                     <div className="containerInputs">
 
-                        <div className="divInput">
-                            <input 
-                                type="text" 
-                                className="form__input" 
-                                placeholder="example@example.com" 
-                                {...register("email")}
-                                // ref={register({ required: 'This is required' })}
-                            />
-                            {/* <ErrorMessage errors={errors} name='username' as="small"/> */}
-                            <label className="form__label">Nombre</label>
-                        </div>
+                    <div className="form-group">
+                        <label htmlFor="apellido" className="col-form-label">Apellido:</label>
+                        <input type="text" value={''} className="form-control" id="apellido" onChange={(e)=>{setFormData({...formData,apellido:e.target.value})}}/>
+                        {/* {errores.apellido?<ErrorForm texto={errores.apellido}/>:''} */}
+                    </div>
 
-                        <div className="divInput">
-                            <input 
-                                type="password" 
-                                className="form__input" 
-                                placeholder="contraseña" 
-                                {...register("contraseña")}
-                            />
-                            <label htmlFor="password" className="form__label">Contraseña</label>
-                        </div>
+                    <div className="form-group">
+                        <label htmlFor="apellido" className="col-form-label">Apellido:</label>
+                        <input type="text" value={''} className="form-control" id="apellido" onChange={(e)=>{setFormData({...formData,apellido:e.target.value})}}/>
+                        {/* {errores.apellido?<ErrorForm texto={errores.apellido}/>:''} */}
+                    </div>
+
                         <p>¿Olvidaste tu contraseña? <a href="" className="">Click aqui</a></p>
                     </div>
                     <div className="divButtons">
