@@ -1,45 +1,47 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import React from 'react'
 import './SignIn.css'
 import inicioSesionService from "../../services/iniciarSesionUsuario";
 
 const SignIn = () => {
 
-  const {handleSubmit, register, errors} = useForm();
-    const [email,setEmail] = useState('');
-    // const [password,setPassword] = useState('');
+  // const {handleSubmit, register, errors} = useForm();
+  //   const [email,setEmail] = useState('');
+  //   // const [password,setPassword] = useState('');
 
-    const navigate = useNavigate();
-
-
-    const notifyError = ()=>{
-        toast.error("Login Incorrect!",
-        {position:"top-right",autoClose: 2000});
-    }
-    const notifySuccess = ()=>{
-        toast.success("Login exitoso!",
-        {position:"top-right",autoClose: 2000,onClose:()=>navigate("/home/reserva")});
-    }
+  //   const navigate = useNavigate();
 
 
-    const onSubmit = values =>{
-        console.log(values)
+  //   const notifyError = ()=>{
+  //       toast.error("Login Incorrect!",
+  //       {position:"top-right",autoClose: 2000});
+  //   }
+  //   const notifySuccess = ()=>{
+  //       toast.success("Login exitoso!",
+  //       {position:"top-right",autoClose: 2000,onClose:()=>navigate("/home/reserva")});
+  //   }
 
-        inicioSesionService(values)
-        .then((response) => {
-            console.log(response)
-            if(response){
-                notifySuccess();
-            }
-            else{
-                notifyError();
-            }
-        })       
 
-    }
+  //   const onSubmit = values =>{
+  //       console.log(values)
 
-    const handleClick = ()=>{
-        navigate("/register");
-    }
+  //       inicioSesionService(values)
+  //       .then((response) => {
+  //           console.log(response)
+  //           if(response){
+  //               notifySuccess();
+  //           }
+  //           else{
+  //               notifyError();
+  //           }
+  //       })       
+
+  //   }
+
+  //   const handleClick = ()=>{
+  //       navigate("/register");
+  //   }
 
 
   return (

@@ -1,56 +1,72 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500");
 
-header li,header a,header button{
-    font-family: "Monserrat",sans-serif;
-    font-weight: 500;
-    font-size: 22px;
-    color: #edf0f1;
-    text-decoration: none;
+nav {
+  position: relative;
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
 }
-
-header img{
-    width: 120px;
-    height: 60px;
+nav .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  width: 30%;
+  margin: 5% auto;
+  cursor: pointer;
+  transition: all 0.5s;
 }
-
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 10%;
-    background-color: #1F2544;;
-    /* background-color: #405cf5; */
+nav .logo .icono {
+  font-size: 70px;
+  margin-right: 5px;
 }
-
-.logo{
-    cursor: pointer;
-    margin-right: auto;
+nav .logo:hover {
+  transform: scale(1.1);
 }
-
-.nav__links{
-    list-style: none;
+nav a:last-child{
+    margin: 0 0 5% 10%;
 }
-
-.nav__links li{
-    display: inline-block;
-    padding: 0px 20px;
+.nav__links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 80%;
+  padding: 40px 0;
 }
-
-.nav__links li a:hover{
-    color:#0088a9;
+.option {
+  color: #fff;
+  text-decoration: none;
+  list-style: none;
+  width: 95%;
+  height: 50px;
+  display: flex;
+  margin: 0 0 10% 10%;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  font-size: 20px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  transition: 0.5s;
 }
-
-header button{
-    margin-left: 20px;
-    padding: 9px 25px;
-    color: #3d3d3d;
-    background-color: rgb(248, 248, 248);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
+.unselected:hover {
+  /* background-color: blue; */
+  color: black;
+  transform: scale(1.05);
 }
-
-header button:hover{
-    background-color: rgba(213, 213, 213, 0.8);
+.option .icono {
+  font-size: 30px;
+  margin-right: 15px;
+}
+.nav__links .selected {
+  background-color: #fff;
+  color: black;
+  cursor: default;
 }

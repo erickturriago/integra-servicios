@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 import { useState } from 'react'
 import './App.css'
@@ -8,7 +9,7 @@ import HomePage from './pages/home/HomePage';
 import NavBar from './components/NavBar/NavBar';
 import Prestamo from './components/Prestamo/Prestamo';
 import Reserva from './components/Reserva/Reserva';
-import RegisterPage from './pages/register/RegisterPage';
+//import RegisterPage from './pages/register/RegisterPage';
 
 function App() {
 
@@ -22,14 +23,12 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <NavBar/>
+      {/* <BrowserRouter>
         <Routes>
 
           <Route path='/' element={<Navigate to="/login"/>}/>
-          <Route path='/' element={<RegisterPage/>}>
-            <Route path='login' element={<SignIn/>}/>
-            <Route path='register' element={<SignUp formData={formRegisterData} setFormData={setForRegisterData}/>}/>
-          </Route>
+          <Route path='/login' element={<SignIn/>}/>
 
           <Route path="home" element={<NavBar/>}>
               <Route path="reserva" element={<Reserva/>}></Route>
@@ -37,7 +36,7 @@ function App() {
             </Route>
           
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </>
   )
 }
