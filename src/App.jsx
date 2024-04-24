@@ -9,6 +9,7 @@ import HomePage from './pages/home/HomePage';
 import NavBar from './components/NavBar/NavBar';
 import Prestamo from './components/Prestamo/Prestamo';
 import Reserva from './components/Reserva/Reserva';
+import RecursoHorarios from './components/RecursoHorarios/RecursoHorarios';
 //import RegisterPage from './pages/register/RegisterPage';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <>
-      <NavBar/>
+      <RecursoHorarios/>
       {/* <BrowserRouter>
         <Routes>
 
