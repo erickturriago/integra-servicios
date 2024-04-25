@@ -64,16 +64,15 @@
   gap: 20px;
   background-color: #fff;
   width: fit-content;
-  min-width: 80%;
   padding: 20px 30px;
   height: var(--alto-container-horas);
 }
 #containerHoras table {
   font-size: 1.5rem;
 }
-#containerHoras table th, td {
+#containerHoras th, #containerHoras td {
   border-bottom: 2px solid rgba(128, 128, 128, 0.15);
-  padding: 15px 0 0;
+  padding: 15px 50px 0;
   text-align: center;
   vertical-align: middle;
   width: fit-content;
@@ -81,7 +80,7 @@
 #containerHoras .unavailable {
     color: rgba(128, 128, 128, 0.15);
 }
-.agregar {
+#containerHoras .agregar {
   border-bottom: none;
 }
 #containerRecursos h1 {
