@@ -4,7 +4,7 @@
   --alto-container-horas: calc(100% - var(--alto-container-busqueda));
   --color-titulo: #f35588;
 }
-.container {
+#containerRecursos{
   display: flex;
   margin-left: 250px;
   flex-direction: column;
@@ -16,7 +16,7 @@
   background-color: #fff;
   z-index: 0;
 }
-.containerBusqueda {
+#containerBusqueda {
   display: flex;
   align-items: center;
   gap: 50px;
@@ -24,7 +24,7 @@
   width: 100%;
   height: var(--alto-container-busqueda);
 }
-.containerBusqueda .busqueda {
+#containerBusqueda #barraBusqueda {
   height: 48px;
   background: #fff;
   color: #000;
@@ -44,11 +44,11 @@
   -moz-box-shadow: 0 0 14px 1px #a3a3a3;
   box-shadow: 0 0 14px 1px #a3a3a3;
 }
-.containerBusqueda span {
+#containerBusqueda span {
   font-size: 2.5rem;
   cursor: pointer;
 }
-.container button {
+#containerRecursos button {
   box-shadow: none !important;
   font-size: 15px;
   padding: 10px 20px;
@@ -58,36 +58,33 @@
   background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
   height: fit-content;
 }
-.containerHoras {
+#containerHoras {
   display: flex;
   flex-direction: column;
   gap: 20px;
   background-color: #fff;
-  width: 100%;
+  width: fit-content;
+  min-width: 80%;
   padding: 20px 30px;
   height: var(--alto-container-horas);
-  border-radius: 50px;
-  -webkit-box-shadow: 0 0 14px 1px #a3a3a3;
-  -moz-box-shadow: 0 0 14px 1px #a3a3a3;
-  box-shadow: 0 0 14px 1px #a3a3a3;
 }
-.containerHoras table {
+#containerHoras table {
   font-size: 1.5rem;
 }
-.containerHoras table th, td {
+#containerHoras table th, td {
   border-bottom: 2px solid rgba(128, 128, 128, 0.15);
   padding: 15px 0 0;
   text-align: center;
   vertical-align: middle;
   width: fit-content;
 }
-.containerHoras .unavailable {
+#containerHoras .unavailable {
     color: rgba(128, 128, 128, 0.15);
 }
-.container table .agregar {
+.agregar {
   border-bottom: none;
 }
-.container h1 {
+#containerRecursos h1 {
   font-size: 2rem;
   color: var(--color-titulo);
 }

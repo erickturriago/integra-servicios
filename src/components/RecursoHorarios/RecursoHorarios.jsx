@@ -7,13 +7,13 @@ import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 const RecursoHorarios = () => {
   return (<>
     <NavBar />
-    <div className='container'>
-      <div className='containerBusqueda'>
-        <input type="text" className='busqueda' id='barraBusqueda' placeholder="&#xF002;" style={{ fontFamily: 'Lato, Arial, FontAwesome', fontSize: '1.3rem' }} />
+    <div id='containerRecursos'>
+      <div id='containerBusqueda'>
+        <input type="text" id='barraBusqueda' className='sombreado' placeholder="&#xF002;" style={{ fontFamily: 'Lato, Arial, FontAwesome', fontSize: '1.3rem' }} />
         <button type='submit' className='buscarBtn'>Buscar</button>
         <span><FontAwesomeIcon icon={faCalendarDays} /></span>
       </div>
-      <div className='containerHoras'>
+      <div className='sombreado' id='containerHoras'>
         <h1>Recursos</h1>
         <table>
           <thead>
@@ -22,7 +22,7 @@ const RecursoHorarios = () => {
             <th>Unidad</th>
             <th>Horario</th>
             <th>Disponibilidad</th>
-            <th className='agregar' />
+            <th className='agregar'/>
           </thead>
           <tbody>
             <tr>
