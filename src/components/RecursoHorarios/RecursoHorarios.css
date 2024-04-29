@@ -48,16 +48,7 @@
   font-size: 2.5rem;
   cursor: pointer;
 }
-#containerRecursos button {
-  box-shadow: none !important;
-  font-size: 15px;
-  padding: 10px 20px;
-  border-radius: 50px;
-  border: 1px solid #f35588;
-  color: #fff;
-  background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
-  height: fit-content;
-}
+
 #containerHoras {
   display: flex;
   flex-direction: column;
@@ -66,22 +57,6 @@
   width: fit-content;
   padding: 20px 30px;
   height: var(--alto-container-horas);
-}
-#containerHoras table {
-  font-size: 1.5rem;
-}
-#containerHoras th, #containerHoras td {
-  border-bottom: 2px solid rgba(128, 128, 128, 0.15);
-  padding: 15px 50px 0;
-  text-align: center;
-  vertical-align: middle;
-  width: fit-content;
-}
-#containerHoras .unavailable {
-    color: rgba(128, 128, 128, 0.15);
-}
-#containerHoras .agregar {
-  border-bottom: none;
 }
 #containerRecursos h1 {
   font-size: 2rem;

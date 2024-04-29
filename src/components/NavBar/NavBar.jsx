@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate} from 'react-router-dom'
 import './NavBar.css'
 import Logo from '../../assets/Logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

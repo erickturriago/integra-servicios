@@ -15,31 +15,32 @@ import InfoUsuario from './components/InfoUsuario/InfoUsuario';
 
 function App() {
 
-  const [formRegisterData,setForRegisterData]=useState({
-    'nombre':'',
-    'apellido':'',
-    'email':'',
-    'cedula':'',
-    'contraseña':'',
+  const [formRegisterData, setForRegisterData] = useState({
+    'nombre': '',
+    'apellido': '',
+    'email': '',
+    'cedula': '',
+    'contraseña': '',
   })
 
   return (
     <>
       {/* <InfoUsuario/> */}
-      <RecursoHorarios/>
-      {/* <BrowserRouter>
+      {/* <RecursoHorarios/> */}
+      <BrowserRouter>
         <Routes>
 
-          <Route path='/' element={<Navigate to="/login"/>}/>
-          <Route path='/login' element={<SignIn/>}/>
+          <Route path='/' element={<Navigate to="/login" />} />
+          <Route path='/login' element={<SignIn />} />
 
-          <Route path="home" element={<NavBar/>}>
-              <Route path="reserva" element={<Reserva/>}></Route>
-              <Route path="prestamo" element={<Prestamo/>}></Route>
-            </Route>
-          
+          <Route path="home" element={<NavBar />}>
+            <Route path='info-usuario' element={<InfoUsuario/>}></Route>
+            <Route path="reserva" element={<RecursoHorarios/>}></Route>
+            <Route path="prestamo" element={<Prestamo />}></Route>
+          </Route>
+
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   )
 }

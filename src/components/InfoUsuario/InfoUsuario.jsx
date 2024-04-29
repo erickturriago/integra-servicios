@@ -6,29 +6,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
+
+const StatsUsuario = () => {
+    return (
+        <div id='containerStats'>
+            <div className="card-info sombreado" id='saldosCard'>
+                <p><h1>40</h1><h2>Saldos<br />Pendientes</h2></p>
+                <span><FontAwesomeIcon icon={faEye} /></span>
+            </div>
+            <div className="card-info sombreado" id='reservasCard'>
+                <p><h1>40</h1><h2>Reservas<br />Realizadas</h2></p>
+                <span><FontAwesomeIcon icon={faEye} /></span>
+            </div>
+            <div className="card-info sombreado" id='prestamosCard'>
+                <p><h1>40</h1><h2>Prestamos<br />Realizados</h2></p>
+                <span><FontAwesomeIcon icon={faEye} /></span>
+            </div>
+            <div className="card-info sombreado" id='devolucionesCard'>
+                <p><h1>40</h1><h2>Devoluciones<br />Completadas</h2></p>
+                <span><FontAwesomeIcon icon={faEye} /></span>
+            </div>
+        </div>
+    )
+}
 const InfoUsuario = () => {
     return (
         <>
             <NavBar />
             <div id='containerUsuario'>
-                <div id='containerStats'>
-                    <div className="card-info sombreado" id='saldosCard'>
-                        <p><h1>40</h1><h2>Saldos<br />Pendientes</h2></p>
-                        <span><FontAwesomeIcon icon={faEye} /></span>
-                    </div>
-                    <div className="card-info sombreado" id='reservasCard'>
-                        <p><h1>40</h1><h2>Reservas<br />Realizadas</h2></p>
-                        <span><FontAwesomeIcon icon={faEye} /></span>
-                    </div>
-                    <div className="card-info sombreado" id='prestamosCard'>
-                        <p><h1>40</h1><h2>Prestamos<br />Realizados</h2></p>
-                        <span><FontAwesomeIcon icon={faEye} /></span>
-                    </div>
-                    <div className="card-info sombreado" id='devolucionesCard'>
-                        <p><h1>40</h1><h2>Devoluciones<br />Completadas</h2></p>
-                        <span><FontAwesomeIcon icon={faEye} /></span>
-                    </div>
-                </div>
+                <StatsUsuario/>
                 <div id='containerInfo' className='sombreado'>
                     <div>
                         <h1><strong>Información del Usuario</strong></h1>

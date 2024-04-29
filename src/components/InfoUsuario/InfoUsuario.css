@@ -23,30 +23,7 @@
   height: 250px;
   width: fit-content;
   background-color: #fff;
-}
-#containerStats .card-info {
-  display: flex;
-  width: fit-content;
-  height: fit-content;
-  background-color: #fff;
-  padding: 10px 25px;
-}
-.card-info p{
-  text-align: center;
-  color: #808080;
-}
-.card-info p h1{
-  color: var(--color-titulo);
-  font-weight: 900;
-}
-.card-info h2{
-  font-size: 1.4rem;
-}
-.card-info span{
-  margin: auto 0 auto 30px;
-  color: #808080;
-  font-size: 3.5rem;
-}
+} 
 #containerUsuario #containerInfo {
   display: flex;
   flex-direction: column;
