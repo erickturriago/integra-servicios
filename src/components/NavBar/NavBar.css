@@ -38,6 +38,9 @@ nav .logo:hover {
   height: 80%;
   padding: 25px 0;
 }
+.nav__links a{
+  text-decoration: none;
+}
 .option {
   color: #fff;
   text-decoration: none;

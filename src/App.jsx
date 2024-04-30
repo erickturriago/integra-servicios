@@ -11,6 +11,7 @@ import Prestamo from './components/Prestamo/Prestamo';
 import Reserva from './components/Reserva/Reserva';
 import RecursoHorarios from './components/RecursoHorarios/RecursoHorarios';
 import InfoUsuario from './components/InfoUsuario/InfoUsuario';
+import HomeAdmin from './components/HomeAdmin/HomeAdmin';
 //import RegisterPage from './pages/register/RegisterPage';
 
 function App() {
@@ -28,17 +29,14 @@ function App() {
       {/* <InfoUsuario/> */}
       {/* <RecursoHorarios/> */}
       <BrowserRouter>
+        <NavBar />
         <Routes>
-
           <Route path='/' element={<Navigate to="/login" />} />
           <Route path='/login' element={<SignIn />} />
-
-          <Route path="home" element={<NavBar />}>
-            <Route path='info-usuario' element={<InfoUsuario/>}></Route>
-            <Route path="reserva" element={<RecursoHorarios/>}></Route>
-            <Route path="prestamo" element={<Prestamo />}></Route>
-          </Route>
-
+          <Route path="/home" element={<HomeAdmin />}></Route>
+          <Route path='/info-usuario' element={<InfoUsuario />}></Route>
+          <Route path="/reserva" element={<RecursoHorarios />}></Route>
+          <Route path="/prestamo" element={<Prestamo />}></Route>
         </Routes>
       </BrowserRouter>
     </>

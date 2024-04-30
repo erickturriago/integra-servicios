@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Outlet, useNavigate} from 'react-router-dom'
+import { Outlet, useNavigate, Link } from 'react-router-dom'
 import './NavBar.css'
 import Logo from '../../assets/Logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -21,18 +21,18 @@ const NavBar = () => {
     return (
         <>
             <nav>
-                <a href="" className='logo'><FontAwesomeIcon icon={faDigg} className='icono' /><strong>Integra servicios</strong></a>
+                <Link to='/' className='logo'><FontAwesomeIcon icon={faDigg} className='icono' /><strong>Integra servicios</strong></Link>
                 <ul className="nav__links">
-                    <a href="" className='option selected' id='userOption' ><FontAwesomeIcon icon={faUser} className='icono' />Mi cuenta</a>
-                    <a href="" className='option unselected' id='recursosOption' ><FontAwesomeIcon icon={faList} className='icono' />Recursos</a>
-                    <a href="" className='option unselected' id='reservasOption' ><FontAwesomeIcon icon={faCalendarCheck} className='icono' />Mis Reservas</a>
-                    <a href="" className='option unselected' id='prestamosOption' ><FontAwesomeIcon icon={faHandshake} className='icono' />Prestamos</a>
-                    <a href="" className='option unselected' id='devolucionesOption' ><FontAwesomeIcon icon={faRotateLeft} className='icono' />Devoluciones</a>
-                    <a href="" className='option unselected' id='usuariosOption' ><FontAwesomeIcon icon={faUsers} className='icono' />Usuarios</a>
-                    <a href="" className='option unselected' id='unidadesOption' ><FontAwesomeIcon icon={faCubes} className='icono' />Unidades</a>
+                    <Link to='/info-usuario' className='option selected' id='userOption' ><FontAwesomeIcon icon={faUser} className='icono' />Mi cuenta</Link>
+                    <Link to='/reserva' className='option unselected' id='recursosOption' ><FontAwesomeIcon icon={faList} className='icono' />Recursos</Link>
+                    <Link to='' className='option unselected' id='reservasOption' ><FontAwesomeIcon icon={faCalendarCheck} className='icono' />Mis Reservas</Link>
+                    <Link to='' className='option unselected' id='prestamosOption' ><FontAwesomeIcon icon={faHandshake} className='icono' />Prestamos</Link>
+                    <Link to='' className='option unselected' id='devolucionesOption' ><FontAwesomeIcon icon={faRotateLeft} className='icono' />Devoluciones</Link>
+                    <Link to='' className='option unselected' id='usuariosOption' ><FontAwesomeIcon icon={faUsers} className='icono' />Usuarios</Link>
+                    <Link to='' className='option unselected' id='unidadesOption' ><FontAwesomeIcon icon={faCubes} className='icono' />Unidades</Link>
 
                 </ul>
-                <a href="" className="option unselected" id='signOutOption' ><FontAwesomeIcon icon={faRightFromBracket} className='icono' />Cerrar Sesion</a>
+                <Link to='/' className="option unselected" id='signOutOption' ><FontAwesomeIcon icon={faRightFromBracket} className='icono' />Cerrar Sesion</Link>
             </nav>
             <Outlet />
         </>

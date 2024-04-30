@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Outlet, useNavigate } from 'react-router-dom'
 import './InfoUsuario.css'
-import NavBar from '../NavBar/NavBar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -32,7 +31,6 @@ const StatsUsuario = () => {
 const InfoUsuario = () => {
     return (
         <>
-            <NavBar />
             <div id='containerUsuario'>
                 <StatsUsuario/>
                 <div id='containerInfo' className='sombreado'>
