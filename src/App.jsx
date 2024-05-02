@@ -4,7 +4,6 @@ import './App.css'
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/home/HomePage';
 import NavBar from './components/NavBar/NavBar';
 import Prestamo from './components/Prestamo/Prestamo';
 import Reserva from './components/Reserva/Reserva';

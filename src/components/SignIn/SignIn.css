@@ -8,12 +8,16 @@
 }
 
 
-.containerForm{
-    padding: 2.5rem 2rem 1rem 2rem;
-    /* width: 100%; */
+.containerSignIn .containerForm{
+    padding: 1rem 2rem 1rem 2rem;
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.containerForm h3{
+.containerSignIn .containerForm h3{
     font-weight: 300;
     margin-bottom: 1.5rem !important;
     font-size: 1.75rem;
@@ -21,11 +25,11 @@
     color: #000;
 }
 
-.containerForm div{
+.containerSignIn .containerForm div{
     margin-bottom: 1rem;
 }
 
-.containerForm form input{
+.containerSignIn .containerForm form input{
     height: 48px;
     background: rgba(0, 0, 0, 0.05);
     color: #000;
@@ -42,7 +46,7 @@
     transition: all 0.2s ease-in-out;
 }
 
-.containerForm form div .btn-signin{
+.containerSignIn .containerForm form div .btn-signin{
     box-shadow: none !important;
     font-size: 15px;
     padding: 10px 20px;
@@ -53,10 +57,9 @@
     background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
 }
 
-.containerForm form label{
+.containerSignIn .containerForm form label{
     font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 1px;
     color: #000;
     font-weight: 700;
     display: inline-block;
@@ -64,17 +67,17 @@
     line-height: 1.8;
 }
 
-.containerForm form input:focus{
+.containerSignIn .containerForm form input:focus{
     outline: none;
 }
 
-.containerForm p{
+.containerSignIn .containerForm p{
     color: gray;
     text-align: right;
     cursor: pointer;
 }
 
-.containerWelcome{
+.containerSignIn .containerWelcome{
     padding: 0rem 2rem 0rem 2rem;
     background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
     display: flex;
@@ -83,7 +86,7 @@
     /* width: 100%; */
 }
 
-.containerWelcome div{
+.containerSignIn .containerWelcome div{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,7 +94,7 @@
     padding: 0 2rem 0 2rem;
 }
 
-.containerWelcome h2{
+.containerSignIn .containerWelcome h2{
     font-weight: 900;
     font-size: 2rem;
     color: #fff;
@@ -99,12 +102,12 @@
     margin-bottom: 0.5rem;
 }
 
-.containerWelcome p{
+.containerSignIn .containerWelcome p{
     color: #fff;
     margin-bottom: 1rem;
 }
 
-.containerWelcome button{
+.containerSignIn .containerWelcome button{
     border: 1px solid #fff;
     background: transparent;
     color: #fff;
@@ -117,7 +120,7 @@
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-.containerWelcome button:hover{
+.containerSignIn .containerWelcome button:hover{
     background-color: #fff;
     color: #000;
 }
