@@ -12,6 +12,7 @@ import Reserva from './components/Reserva/Reserva';
 import RecursoHorarios from './components/RecursoHorarios/RecursoHorarios';
 import InfoUsuario from './components/InfoUsuario/InfoUsuario';
 import HomeAdmin from './components/HomeAdmin/HomeAdmin';
+import { ContextProvider } from './components/utils/global.Context';
 //import RegisterPage from './pages/register/RegisterPage';
 
 function App() {
@@ -25,11 +26,11 @@ function App() {
   })
 
   return (
-    <>
+    <ContextProvider>
       {/* <InfoUsuario/> */}
       {/* <RecursoHorarios/> */}
       <BrowserRouter>
-        <NavBar />
+        <NavBar/>
         <Routes>
           <Route path='/' element={<Navigate to="/login" />} />
           <Route path='/login' element={<SignIn />} />
@@ -39,7 +40,7 @@ function App() {
           <Route path="/prestamo" element={<Prestamo />}></Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </ContextProvider>
   )
 }
 

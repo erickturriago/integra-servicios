@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { useUsuario } from '../utils/global.Context'
 
 const StatsUsuario = () => {
     return (
@@ -29,6 +30,8 @@ const StatsUsuario = () => {
     )
 }
 const InfoUsuario = () => {
+    const {state} = useUsuario()
+    console.log(state)
     return (
         <>
             <div id='containerUsuario'>
@@ -43,27 +46,27 @@ const InfoUsuario = () => {
                         <table id='tablaInfoUsuario'>
                             <tr>
                                 <th>Nombre:</th>
-                                <td>Erika Leonarda Sabogal Ostos</td>
+                                <td>{state.nombre}</td>
                             </tr>
                             <tr>
                                 <th>Documento:</th>
-                                <td>1002442233</td>
+                                <td>{state.documento}</td>
                             </tr>
                             <tr>
                                 <th>Telefono:</th>
-                                <td>314 876 2792</td>
+                                <td>{state.telefono}</td>
                             </tr>
                             <tr>
                                 <th>Correo:</th>
-                                <td>erikaleo@gmail.com</td>
+                                <td>{state.correo}</td>
                             </tr>
                             <tr>
                                 <th>Ocupacion:</th>
-                                <td>Estudiante</td>
+                                <td>{state.ocupacion}</td>
                             </tr>
                             <tr>
                                 <th>Estado:</th>
-                                <td>Activo (a)</td>
+                                <td>{state.estado}</td>
                             </tr>
                         </table>
                     </div>
