@@ -1,6 +1,6 @@
 const ENDPOINT=`${import.meta.env.VITE_API_URL}/usuarios/registrar`
 
-export default function register (data) {
+export function registrarUsuario (data) {
 
   const hoy = new Date();
 
@@ -12,7 +12,7 @@ export default function register (data) {
   // Formatear la fecha en el formato YYYY-MM-DD
   const fechaHoy = `${año}-${mes}-${dia}`;
 
-  const dataCompleta = {...data,fechaRegistro:fechaHoy}
+  const dataCompleta = {...data,fechaRegistro:fechaHoy,rol:'2'}
 
   console.log(JSON.stringify(dataCompleta))
 

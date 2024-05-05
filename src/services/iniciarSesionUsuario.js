@@ -1,9 +1,8 @@
 const ENDPOINT=`${import.meta.env.VITE_API_URL}/usuarios/iniciarSesion`
 
-export default function inicioSesion (data) {
+export default function inicioSesion(data) {
 
-  console.log(JSON.stringify(data))
-
+  console.log(JSON.stringify(data));
 
   return fetch(`${ENDPOINT}`, {
     method: 'POST',
@@ -11,10 +10,15 @@ export default function inicioSesion (data) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
-  }).then(res => {
-    if (!res.ok){
-        return false;
+  }).then(async res => {
+    console.log(res)
+    const responseData = await res.json();
+    console.log(responseData)
+    if (!res.ok) {
+      throw new Error(responseData.message || "Error en la solicitud");
     }
-    return true;
-  })
+    return { success: true, responseData };
+  }).catch(error => {
+    return { success: false, error: error.message };
+  });
 }

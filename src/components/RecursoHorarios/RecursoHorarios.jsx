@@ -2,6 +2,8 @@ import './RecursoHorarios.css'
 import 'font-awesome/css/font-awesome.min.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
+import { useEffect } from 'react'
+import recursos from '../../services/recursos'
 
 const TablaRecursos = () => {
   return (<table className='integra-serv-tabla'>
@@ -138,6 +140,10 @@ const TablaRecursos = () => {
 }
 
 const RecursoHorarios = () => {
+  useEffect(() => {
+    console.log('recursos')
+    recursos()
+  }, [])
   return (
     <div id='containerRecursos'>
       <div id='containerBusqueda'>
