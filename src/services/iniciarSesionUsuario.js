@@ -1,4 +1,4 @@
-const ENDPOINT=`${import.meta.env.VITE_API_URL}/usuarios/iniciarSesion`
+const ENDPOINT=`${import.meta.env.VITE_API_URL}/auth/login`
 
 export default function inicioSesion(data) {
 
@@ -6,18 +6,16 @@ export default function inicioSesion(data) {
 
   return fetch(`${ENDPOINT}`, {
     method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
     body: JSON.stringify(data)
   }).then(async res => {
-    console.log(res)
-    const responseData = await res.json();
-    console.log(responseData)
-    if (!res.ok) {
-      throw new Error(responseData.message || "Error en la solicitud");
-    }
-    return { success: true, responseData };
+      const token = res.headers.get('Authorization').replace('Bearer ',"");
+
+      if (!res.ok) {
+        throw new Error("Error en la solicitud");
+      }
+
+      localStorage.setItem('token',token)
+      return { success: true, token };
   }).catch(error => {
     return { success: false, error: error.message };
   });

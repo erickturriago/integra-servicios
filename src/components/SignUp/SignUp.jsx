@@ -46,6 +46,7 @@ const SignUp = () => {
 
 
   return (
+    <div className='homeSignInSignUp'>
     <div className='containerSignUp'>
       <div className='containerForm'>
         <h3>Sign Up</h3>
@@ -107,6 +108,7 @@ const SignUp = () => {
         </div>
       </div>
       <ToastContainer/>
+    </div>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import inicioSesionService from "../../services/iniciarSesionUsuario";
 import './SignIn.css'
 import { ToastContainer, toast } from 'react-toastify';
 import {validarSignInForm} from '../../services/validacionForm'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -14,10 +14,14 @@ const SignIn = () => {
   const [errors, setErrors] = useState({});
 
   const notifySuccess = ()=>{
-    console.log("Noficiando success")
       toast.success("Login exitoso!",
+      {position:"top-right",autoClose: 1000,onClose:()=>navigate('/reserva')});
+  }
+
+  const notifyError = ()=>{
+    console.log("Noficiando success")
+      toast.error("Credenciales inválidas",
       {position:"top-right",autoClose: 1000});
-      // {position:"top-right",autoClose: 1000,onClose:()=>navigate('/login')});
   }
 
   const handleChange = (event) => {
@@ -34,15 +38,24 @@ const SignIn = () => {
       inicioSesionService(formData)
         .then((response) => {
             console.log(response)
-            if(response){
+            if(response.success){
                 notifySuccess();
+            }
+            else{
+              notifyError();
             }
         }) 
     }
   };
 
+  useEffect(()=>{
+    const token = localStorage.getItem('token');
+    token!=undefined?navigate("/reserva"):""
+  },[])
+
 
   return (
+    <div className='homeSignInSignUp'>
     <div className='containerSignIn'>
       <div className='containerForm'>
         <h3>Sign in</h3>
@@ -83,6 +96,7 @@ const SignIn = () => {
         </div>
       </div>
       <ToastContainer/>
+    </div>
     </div>
   )
 }
