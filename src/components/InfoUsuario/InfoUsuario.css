@@ -1,0 +1,66 @@
+:root {
+  --ancho-container: calc(100% - 250px);/*1361.33px*/
+  --color-titulo: #f35588;
+}
+#containerUsuario {
+  display: flex;
+  margin-left: 250px;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  height: auto;
+  gap: 10px;
+  padding: 30px 50px;
+  width: var(--ancho-container);
+  background-color: #fff;
+  z-index: 0;
+}
+#containerUsuario #containerStats {
+  display: grid;
+  gap: 40px;
+  padding: 35px;
+  grid-template-columns: repeat(4, 1fr);
+  height: 250px;
+  width: fit-content;
+  background-color: #fff;
+} 
+#containerUsuario #containerInfo {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  background-color: #fff;
+  width: fit-content;
+  padding: 30px 50px;
+}
+#containerInfo div{
+    display: inherit;
+    width: 100%;
+    flex-wrap: wrap;
+}
+#containerInfo h1{
+    color: var(--color-titulo);
+    font-size: 2.5rem;
+}
+#containerInfo #editIcon{
+    font-size: 2rem;
+    margin-left: auto;
+    height: fit-content;
+}
+#containerInfo #userIcon{
+    font-size: 13rem;
+    height: fit-content; 
+    width: fit-content;
+}
+#containerInfo #tablaInfoUsuario{
+    margin: auto auto auto 50px;
+    height: fit-content;
+    border-collapse: separate;
+    border-spacing: 30px 10px;
+    font-size: 1.2rem;
+}
+#containerInfo #tablaInfoUsuario th, #tablaInfoUsuario  td{
+    width: fit-content;
+    padding: 0;
+    border-bottom: none;
+    text-align: left;
+}

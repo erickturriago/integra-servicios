@@ -1,0 +1,65 @@
+:root {
+  --ancho-container: calc(100% - 250px); /*1361.33px*/
+  --color-titulo: #f35588;
+}
+#containerHome {
+  display: flex;
+  margin-left: 250px;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  height: auto;
+  gap: 10px;
+  padding: 30px 50px;
+  width: var(--ancho-container);
+  background-color: #fff;
+  z-index: 0;
+}
+#containerHome #containerStats {
+  display: grid;
+  gap: 40px;
+  padding: 35px;
+  grid-template-columns: repeat(4, 1fr);
+  height: 220px;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+}
+#containerData {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(100%-220px);
+  height: auto;
+  gap: 25px;
+}
+#containerReservasAdmin {
+    padding: 15px 10px;
+}
+#listaUsuarios {
+  width: 300px;
+}
+#listaUsuarios h1 {
+  color: var(--color-titulo);
+  font-size: 1.8rem;
+  margin: 15px auto 20px 30px;
+}
+#listaUsuarios ul {
+  padding-left: 0;
+  margin-left: 30px;
+    height: 2rem;
+}
+#listaUsuarios li {
+  list-style: none;
+  margin-bottom: 15px;
+}
+#listaUsuarios a {
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  font-size: 1.3rem;
+}
+#listaUsuarios li svg {
+  font-size: 1.8rem;
+  margin-right: 20px;
+}
