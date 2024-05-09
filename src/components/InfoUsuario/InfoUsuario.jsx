@@ -11,19 +11,19 @@ const StatsUsuario = () => {
     return (
         <div id='containerStats'>
             <div className="card-info sombreado" id='saldosCard'>
-                <p><h1>40</h1><h2>Saldos<br />Pendientes</h2></p>
+                <div><p>40</p><p>T. Recursos</p></div>
                 <span><FontAwesomeIcon icon={faEye} /></span>
             </div>
             <div className="card-info sombreado" id='reservasCard'>
-                <p><h1>40</h1><h2>Reservas<br />Realizadas</h2></p>
+                <div><p>40</p><p>T. Reservas</p></div>
                 <span><FontAwesomeIcon icon={faEye} /></span>
             </div>
             <div className="card-info sombreado" id='prestamosCard'>
-                <p><h1>40</h1><h2>Prestamos<br />Realizados</h2></p>
+                <div><p>40</p><p>T. Prestamos</p></div>
                 <span><FontAwesomeIcon icon={faEye} /></span>
             </div>
             <div className="card-info sombreado" id='devolucionesCard'>
-                <p><h1>40</h1><h2>Devoluciones<br />Completadas</h2></p>
+                <div><p>40</p><p>T. Devoluciones</p></div>
                 <span><FontAwesomeIcon icon={faEye} /></span>
             </div>
         </div>

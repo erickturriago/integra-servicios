@@ -1,5 +1,4 @@
-import React from 'react'
-import RecursoReserva from '../RecursoReserva/RecursoReserva';
+// import RecursoReserva from '../RecursoReserva/RecursoReserva';
 import './Reserva.css'
 
 const Reserva = () => {
@@ -35,9 +34,10 @@ const Reserva = () => {
 
   return (
     <div className='containerReservas'>
-      {recursos.map((recurso,index)=>{
-        return <RecursoReserva key={index} recurso={recurso}/>
-      })}
+      {/* {recursos.map((recurso,index)=>{
+        // return <RecursoReserva key={index} recurso={recurso}/>
+        return <></>
+      })} */}
     </div>
   )
 }

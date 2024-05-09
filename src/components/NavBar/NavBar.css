@@ -10,6 +10,7 @@ nav {
   flex-direction: column;
   justify-content: space-between;
   z-index: 1;
+  padding: .2rem 0 1rem 0;
 }
 nav .logo {
   display: flex;
@@ -35,8 +36,10 @@ nav .logo:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   height: 80%;
   padding: 25px 0;
+  gap: 1.5rem;
 }
 .nav__links a{
   text-decoration: none;
@@ -45,13 +48,14 @@ nav .logo:hover {
   color: #fff;
   text-decoration: none;
   list-style: none;
-  width: 90%;
-  height: 50px;
+  width: 100%;
+  /* height: 50px; */
   display: flex;
-  margin: 0 0 10% 10%;
+  /* margin: 0 0 10% 10%; */
+  padding: 1.5rem 0 1.5rem 2rem;
   justify-content: flex-start;
   align-items: center;
-  padding: 20px;
+  /* padding: 20px; */
   font-size: 20px;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
@@ -60,7 +64,7 @@ nav .logo:hover {
 .unselected:hover {
   /* background-color: blue; */
   color: black;
-  transform: scale(1.05);
+  transform: scale(1.01);
 }
 .option .icono {
   font-size: 30px;
@@ -70,4 +74,5 @@ nav .logo:hover {
   background-color: #fff;
   color: black;
   cursor: default;
+  /* padding: 1rem 0rem 1rem 1rem; */
 }

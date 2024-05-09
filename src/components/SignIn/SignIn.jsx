@@ -15,7 +15,7 @@ const SignIn = () => {
 
   const notifySuccess = ()=>{
       toast.success("Login exitoso!",
-      {position:"top-right",autoClose: 1000,onClose:()=>navigate('/reserva')});
+      {position:"top-right",autoClose: 1000,onClose:()=>navigate('/info-usuario')});
   }
 
   const notifyError = ()=>{
@@ -50,7 +50,7 @@ const SignIn = () => {
 
   useEffect(()=>{
     const token = localStorage.getItem('token');
-    token!=undefined?navigate("/reserva"):""
+    token!=undefined?navigate("/info-usuario"):""
   },[])
 
 

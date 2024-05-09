@@ -1,14 +1,12 @@
 /* eslint-disable no-unused-vars */
 
 import { useEffect, useState } from 'react'
-import './App.css'
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Prestamo from './components/Prestamo/Prestamo';
 import Reserva from './components/Reserva/Reserva';
-import RecursoHorarios from './components/RecursoHorarios/RecursoHorarios';
 import InfoUsuario from './components/InfoUsuario/InfoUsuario';
 import HomeAdmin from './components/HomeAdmin/HomeAdmin';
 import { ContextProvider } from './components/utils/global.Context';
@@ -26,16 +24,21 @@ function App() {
       {/* <InfoUsuario/> */}
       {/* <RecursoHorarios/> */}
       <BrowserRouter>
-        {showNavBar && <NavBar />}
         <Routes>
           <Route path='/' element={<Navigate to="/login" />} />
           <Route path='/login' element={<SignIn />} />
           <Route path='/register' element={<SignUp />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/home" element={<HomeAdmin />}></Route>
-            <Route path='/info-usuario' element={<InfoUsuario />}></Route>
-            <Route path="/reserva" element={<RecursoHorarios />}></Route>
-            <Route path="/prestamo" element={<Prestamo />}></Route>
+            <Route element={<NavBar />}>
+              <Route path="/home" element={<HomeAdmin />}></Route>
+              <Route path='/info-usuario' element={<InfoUsuario />}></Route>
+              <Route path="/recursos" element={<h1>Recursos</h1>}></Route>
+              <Route path="/reservas" element={<h1>Recursos</h1>}></Route>
+              <Route path="/prestamos" element={<h1>Recursos</h1>}></Route>
+              <Route path="/devoluciones" element={<h1>Recursos</h1>}></Route>
+              <Route path="/usuarios" element={<h1>Recursos</h1>}></Route>
+              <Route path="/unidades" element={<h1>Recursos</h1>}></Route>
+            </Route>
           </Route>
 
           <Route path='*' element={<Navigate to="/"/>}/>
