@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:500");
 
 nav {
-  position: fixed;
-  width: 250px;
+  /* position: fixed; */
+  min-width: 300px;
   min-height: 100vh;
   height: auto;
   background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
@@ -10,7 +10,7 @@ nav {
   flex-direction: column;
   justify-content: space-between;
   z-index: 1;
-  padding: .2rem 0 1rem 0;
+  padding: .2rem 0 1rem 1rem;
 }
 nav .logo {
   display: flex;
@@ -39,7 +39,7 @@ nav .logo:hover {
   justify-content: center;
   height: 80%;
   padding: 25px 0;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 .nav__links a{
   text-decoration: none;

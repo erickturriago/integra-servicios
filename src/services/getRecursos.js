@@ -1,11 +1,21 @@
+import { useIntegraStates } from "../components/utils/global.Context";
+
 const ENDPOINT = `${import.meta.env.VITE_API_URL}/recursos/listar`
 
-export default function recursos() {
+export default function getRecursos() {
+    const token = localStorage.getItem('token');
+
+
     return (
-        fetch(`${ENDPOINT}`, { method: 'GET' })
+        fetch(`${ENDPOINT}`, { method: 'GET',
+            headers: {
+                'Authorization': `${token}`
+            }
+        })
             .then(async res => {
                 const responseData = await res.json()
                 console.log(responseData)
+                // dispatch({type:'SET_LIST_RECURSOS',payload:responseData})
                 if (!res.ok) {
                     throw new Error(responseData.message || 'Error en la solicitud')
                 }

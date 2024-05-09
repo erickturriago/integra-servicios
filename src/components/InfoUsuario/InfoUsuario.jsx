@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { useUsuario } from '../utils/global.Context'
+// import { useUsuario } from '../utils/global.Context'
 
 const StatsUsuario = () => {
     return (
@@ -30,11 +30,11 @@ const StatsUsuario = () => {
     )
 }
 const InfoUsuario = () => {
-    const {state} = useUsuario()
-    console.log(state)
+    // const {state} = useUsuario()
+    // console.log(state)
     return (
         <>
-            <div id='containerUsuario'>
+            {/* <div id='containerUsuario'>
                 <StatsUsuario/>
                 <div id='containerInfo' className='sombreado'>
                     <div>
@@ -71,7 +71,7 @@ const InfoUsuario = () => {
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

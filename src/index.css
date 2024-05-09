@@ -13,17 +13,18 @@
 html,
 body,
 #root {
-  display: inline-block;
+  display: flex;
   width: 100vw;
   min-height: 100vh;
   height: auto;
+  /* gap: 1rem; */
 }
-.sombreado {
+/* .sombreado {
   border-radius: 50px;
   -webkit-box-shadow: 0 0 14px 1px #a3a3a3;
   -moz-box-shadow: 0 0 14px 1px #a3a3a3;
   box-shadow: 0 0 14px 1px #a3a3a3;
-}
+} */
 /* Tabla Integra Servicios */
 .integra-serv-tabla {
   font-size: 1.5rem;

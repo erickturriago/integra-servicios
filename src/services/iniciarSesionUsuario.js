@@ -8,7 +8,7 @@ export default function inicioSesion(data) {
     method: 'POST',
     body: JSON.stringify(data)
   }).then(async res => {
-      const token = res.headers.get('Authorization').replace('Bearer ',"");
+      const token = res.headers.get('Authorization')//.replace('Bearer ',"");
 
       if (!res.ok) {
         throw new Error("Error en la solicitud");

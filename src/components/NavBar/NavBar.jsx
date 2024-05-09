@@ -56,7 +56,7 @@ const NavBar = () => {
                 <ul className="nav__links">
                     <Link name='info-usuario' to='/info-usuario' className={`option ${btnSelected['info-usuario']}`} id='userOption' onClick={handleClick} ><FontAwesomeIcon icon={faUser} className='icono'/>Mi cuenta</Link>
                     <Link name='recursos' to='/recursos' className={`option ${btnSelected['recursos']}`} id='recursosOption' onClick={handleClick} ><FontAwesomeIcon icon={faList} className='icono' />Recursos</Link>
-                    <Link name='reservas' to='/reservas' className={`option ${btnSelected['reservas']}`} id='reservasOption' onClick={handleClick}><FontAwesomeIcon icon={faCalendarCheck} className='icono' />Mis Reservas</Link>
+                    <Link name='reservas' to='/reservas' className={`option ${btnSelected['reservas']}`} id='reservasOption' onClick={handleClick}><FontAwesomeIcon icon={faCalendarCheck} className='icono' />Reservas</Link>
                     <Link name='prestamos' to='/prestamos' className={`option ${btnSelected['prestamos']}`} id='prestamosOption' onClick={handleClick}><FontAwesomeIcon icon={faHandshake} className='icono' />Prestamos</Link>
                     <Link name='devoluciones' to='/devoluciones' className={`option ${btnSelected['devoluciones']}`} id='devolucionesOption' onClick={handleClick}><FontAwesomeIcon icon={faRotateLeft} className='icono' />Devoluciones</Link>
                     <Link name='usuarios' to='/usuarios' className={`option ${btnSelected['usuarios']}`} id='usuariosOption' onClick={handleClick}><FontAwesomeIcon icon={faUsers} className='icono' />Usuarios</Link>
