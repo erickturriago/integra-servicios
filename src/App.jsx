@@ -33,11 +33,11 @@ function App() {
               <Route path="/home" element={<HomeAdmin />}></Route>
               <Route path='/info-usuario' element={<InfoUsuario />}></Route>
               <Route path="/recursos" element={<h1>Recursos</h1>}></Route>
-              <Route path="/reservas" element={<h1>Recursos</h1>}></Route>
-              <Route path="/prestamos" element={<h1>Recursos</h1>}></Route>
-              <Route path="/devoluciones" element={<h1>Recursos</h1>}></Route>
-              <Route path="/usuarios" element={<h1>Recursos</h1>}></Route>
-              <Route path="/unidades" element={<h1>Recursos</h1>}></Route>
+              <Route path="/reservas" element={<h1>reservas</h1>}></Route>
+              <Route path="/prestamos" element={<h1>prestamos</h1>}></Route>
+              <Route path="/devoluciones" element={<h1>devoluciones</h1>}></Route>
+              <Route path="/usuarios" element={<h1>usuarios</h1>}></Route>
+              <Route path="/unidades" element={<h1>unidades</h1>}></Route>
             </Route>
           </Route>
 

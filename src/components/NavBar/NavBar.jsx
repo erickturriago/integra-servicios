@@ -44,6 +44,11 @@ const NavBar = () => {
         navigate(clickedBtnName)
       };
 
+    const cerrarSesion = ()=>{
+        localStorage.removeItem('token')
+        navigate('/')
+    }
+
     return (
         <>
             <nav>
@@ -58,7 +63,7 @@ const NavBar = () => {
                     <Link name='unidades' to='/unidades' className={`option ${btnSelected['unidades']}`} id='unidadesOption' onClick={handleClick}><FontAwesomeIcon icon={faCubes} className='icono' />Unidades</Link>
 
                 </ul>
-                <Link to='/' className="option unselected" id='signOutOption' ><FontAwesomeIcon icon={faRightFromBracket} className='icono' />Cerrar Sesion</Link>
+                <Link to='/' className="option unselected" id='signOutOption' onClick={cerrarSesion} ><FontAwesomeIcon icon={faRightFromBracket} className='icono' />Cerrar Sesion</Link>
             </nav>
             <Outlet />
         </>
