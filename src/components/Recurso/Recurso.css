@@ -10,7 +10,7 @@
     /* -webkit-box-shadow: 0 0 5px 1px #a3a3a3;
     -moz-box-shadow: 0 0 5px 1px #a3a3a3; */
     box-shadow: 0 0 10px 1px #c6c6c6;
-
+    position: relative;
 }
 
 .containerRecursos{

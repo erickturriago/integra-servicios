@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import { reducer } from "../reducers/reducer";
+import { reducer } from "./reducers/reducer";
 
 const IntegraContext = createContext()
 
@@ -8,6 +8,7 @@ export const useIntegraStates = () => useContext(IntegraContext)
 const initialState = {
     token:null,
     recursosList:[],
+    unidadesList:[],
     reservasList:[],
     prestamosList:[],
     devolucionesList:[],

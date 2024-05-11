@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import inicioSesionService from "../../services/iniciarSesionUsuario";
+import inicioSesionService from "../../services/get/iniciarSesionUsuario";
 import './SignIn.css'
+import {validarSignInForm} from "../utils/validacionForm"
 import { ToastContainer, toast } from 'react-toastify';
-import {validarSignInForm} from '../../services/validacionForm'
 import { useEffect, useState } from 'react';
 
 const SignIn = () => {

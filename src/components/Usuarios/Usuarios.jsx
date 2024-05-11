@@ -1,4 +1,4 @@
-import getReservas from '../../services/get/getReservas';
+import getUsuarios from '../../services/get/getUsuarios';
 import { useIntegraStates } from '../utils/global.Context';
 import { useEffect, useState } from 'react';
 import { ToastContainer} from 'react-toastify'
@@ -7,48 +7,44 @@ import { faTrashCan, faPencil} from '@fortawesome/free-solid-svg-icons'
 import './Reserva.css'
 
 
-const Reserva = () => {
+const Usuarios = () => {
 
   const {state, dispatch} = useIntegraStates()
   
   const [reload,setReload] = useState(true)
 
   useEffect(() =>{
-    getReservas()
+    getUsuarios()
     .then(response => {
       if(response.succes){
-        console.log(state.reservasList)
-        dispatch({type: 'SET_LIST_RESERVAS', payload: response.responseData})
-        console.log(state.reservasList)
+        console.log(state.usuariosList)
+        dispatch({type: 'SET_LIST_USUARIOS', payload: response.responseData})
+        console.log(state.usuariosList)
       }
     })
   },[reload])
 
   return (
     <div className='container-home'>
-      <div className='containerReservas'>
-        <div className='list-reservas'>
+      <div className='containerUsuarios'>
+        <div className='list-usuarios'>
           <table className='table'>
             <thead>
               <tr>
-                <th>Recurso</th>
-                <th>Usuario</th>
-                <th>FechaInicio</th>
-                <th>Fecha fin</th>
-                <th>Estado</th>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>E-mail</th>
                 <th></th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {state.reservasList.map((reserva)=>{
+              {state.usuariosList.map((usuario)=>{
                 return(
-                  <tr key={reserva.id}>
-                    <td>{reserva.recurso.nombre}</td>
-                    <td>{reserva.usuario.fullname}</td>
-                    <td>{reserva.fechaInicio}</td>
-                    <td>{reserva.fechaFin}</td>
-                    <td>{reserva.estado}</td>
+                  <tr key={usuario.id}>
+                    <td>{usuario.fullname}</td>
+                    <td>{usuario.cedula}</td>
+                    <td>{usuario.email}</td>
                     <td><FontAwesomeIcon icon={faPencil} className='reserva-icon'/></td>
                     <td><FontAwesomeIcon icon={faTrashCan} className='reserva-icon'/></td>
                   </tr>
@@ -71,4 +67,4 @@ const Reserva = () => {
   // )
 }
 
-export default Reserva
+export default Usuarios

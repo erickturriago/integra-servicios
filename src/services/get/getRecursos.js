@@ -1,5 +1,3 @@
-import { useIntegraStates } from "../components/utils/global.Context";
-
 const ENDPOINT = `${import.meta.env.VITE_API_URL}/recursos/listar`
 
 export default function getRecursos() {
@@ -15,7 +13,6 @@ export default function getRecursos() {
             .then(async res => {
                 const responseData = await res.json()
                 console.log(responseData)
-                // dispatch({type:'SET_LIST_RECURSOS',payload:responseData})
                 if (!res.ok) {
                     throw new Error(responseData.message || 'Error en la solicitud')
                 }

@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css'
 import { useState } from 'react';
-import {validarSignUpForm} from '../../services/validacionForm'
+import {validarSignUpForm} from '../utils/validacionForm'
 import { ToastContainer, toast } from 'react-toastify';
-import {registrarUsuario} from '../../services/registrarUsuario'
+import {registrarUsuario} from '../../services/post/registrarUsuario'
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {

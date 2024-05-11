@@ -2,6 +2,10 @@ export const reducer = (state, action) => {
     switch(action.type) {
         case 'SET_LIST_RECURSOS': 
             return {...state, recursosList: action.payload}
+        case 'SET_LIST_UNIDADES': 
+            return {...state, unidadesList: action.payload}
+        case 'SET_LIST_RESERVAS':
+            return {...state, reservasList: action.payload}
         case 'ADD_FAV':
             return {...state, dentistaSelected: [...state.dentistaSelected, action.payload]}
         case 'DEL_FAV':

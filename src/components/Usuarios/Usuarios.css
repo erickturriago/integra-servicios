@@ -20,13 +20,13 @@
     position: relative;
 }
 
-.containerReservas{
+.containerUsuarios{
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.containerReservas .reserva-icon{
+.containerUsuarios .reserva-icon{
     font-size: 20px;
     color: #f35587;
     cursor: pointer;
