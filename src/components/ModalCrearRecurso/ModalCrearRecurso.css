@@ -98,6 +98,17 @@
     border: 1px solid black;
 }
 
+.containerForm .btn-default{
+    /* border: 1px solid red; */
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+    background-color: lightgrey;
+    cursor: pointer;
+    font-size: 12px;
+    /* font-size: .5rem; */
+}
+
 
 .containerForm .closeModal{
     font-size: 2rem;

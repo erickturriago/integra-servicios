@@ -9,6 +9,8 @@ import Prestamo from './components/Prestamo/Prestamo';
 import Reserva from './components/Reserva/Reserva';
 import Recursos from './components/Recurso/Recurso'
 import InfoUsuario from './components/InfoUsuario/InfoUsuario';
+import Usuarios from './components/Usuarios/Usuarios';
+import Unidades from './components/Unidades/Unidades'
 import { ContextProvider } from './components/utils/global.Context';
 import ProtectedRoute from './components/utils/ProtectedRoute';
 
@@ -35,8 +37,8 @@ function App() {
               <Route path="/reservas" element={<Reserva/>}></Route>
               <Route path="/prestamos" element={<h1>prestamos</h1>}></Route>
               <Route path="/devoluciones" element={<h1>devoluciones</h1>}></Route>
-              <Route path="/usuarios" element={<h1>usuarios</h1>}></Route>
-              <Route path="/unidades" element={<h1>unidades</h1>}></Route>
+              <Route path="/usuarios" element={<Usuarios/>}></Route>
+              <Route path="/unidades" element={<Unidades/>}></Route>
             </Route>
           </Route>
 

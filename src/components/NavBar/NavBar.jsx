@@ -12,42 +12,62 @@ import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
 import { faCubes } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const NavBar = () => {
 
     const [btnSelected,setBtnSelected] = useState({
-        "info-usuario":"unselected",
-        "recursos":"selected",
-        "reservas":"unselected",
-        "prestamos":"unselected",
-        "devoluciones":"unselected",
-        "usuarios":"unselected",
-        "unidades":"unselected"
+        "info-usuario": "unselected",
+        "recursos": "unselected",
+        "reservas": "unselected",
+        "prestamos": "unselected",
+        "devoluciones": "unselected",
+        "usuarios": "unselected",
+        "unidades": "unselected"
     })
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const lastSelectedButton = localStorage.getItem('lastSelectedButton');
+        if (lastSelectedButton) {
+            setBtnSelected(JSON.parse(lastSelectedButton));
+        } else {
+            // Si no hay ningún botón seleccionado previamente, seleccionar "recursos" por defecto
+            setBtnSelected({
+                ...btnSelected,
+                "recursos": "selected"
+            });
+        }
+    }, []);
+
     const handleClick = (e) => {
         e.preventDefault();
         const previousBtnSelected = Object.keys(btnSelected).find(
-          (btnName) => btnSelected[btnName] === "selected"
+            (btnName) => btnSelected[btnName] === "selected"
         ); // Identificar el botón previamente seleccionado
         const clickedBtnName = e.target.name;
-      
+
         setBtnSelected({
-          ...btnSelected,
-          [previousBtnSelected]: "unselected", // Deseleccionar el botón anterior
-          [clickedBtnName]: "selected", // Seleccionar el nuevo botón
+            ...btnSelected,
+            [previousBtnSelected]: "unselected", // Deseleccionar el botón anterior
+            [clickedBtnName]: "selected", // Seleccionar el nuevo botón
         });
 
-        navigate(clickedBtnName)
-      };
+        localStorage.setItem('lastSelectedButton', JSON.stringify({
+            ...btnSelected,
+            [previousBtnSelected]: "unselected",
+            [clickedBtnName]: "selected"
+        }));
 
-    const cerrarSesion = ()=>{
-        localStorage.removeItem('token')
-        navigate('/')
-    }
+        navigate(clickedBtnName);
+    };
+
+    const cerrarSesion = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('lastSelectedButton');
+        navigate('/');
+    };
 
     return (
         <>
