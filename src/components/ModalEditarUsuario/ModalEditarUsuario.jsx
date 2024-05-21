@@ -4,12 +4,12 @@ import getUnidades from '../../services/get/getUnidades';
 import { useIntegraStates } from '../utils/global.Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faXmark} from '@fortawesome/free-solid-svg-icons'
-import { validarRecursoForm } from '../utils/validacionForms/validacionFormRegistroRecurso';
-import { actualizarRecurso } from '../../services/update/actualizarRecurso';
+import { validarEditarUsuarioForm } from '../utils/validacionForms/validacionFormEditarUsuario';
+import { actualizarUsuario } from '../../services/update/actualizarUsuario';
 
 const ModalEditarUsuario = ({setShowModalEditarUsuario,reload,setReload,usuarioEditar}) => {
     const [formData, setFormData] = useState({
-        nombre: '',
+        fullname: '',
         cedula:'',
         email:'',
         rol:''
@@ -23,22 +23,34 @@ const ModalEditarUsuario = ({setShowModalEditarUsuario,reload,setReload,usuarioE
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        const validationErrors = validarRecursoForm(formData);
+        const validationErrors = validarEditarUsuarioForm(formData);
         console.log(validationErrors)
         setErrors(validationErrors);
-
+        
         if (Object.keys(validationErrors).length === 0) {
             console.log(formData)
-            actualizarRecurso(formData)
+            actualizarUsuario(formData)
                 .then((response) => {
                     if(response.succes){
                         console.log(response)
-                        setShowModalEditarRecurso(false)
+                        setShowModalEditarUsuario(false)
+                        alert("Usuario modificado correctamente.")
                         setReload(!reload)
                     }
                 }) 
         }
     };
+
+    const getRol=(idRol)=>{
+        switch(idRol){
+            case 1:
+                return "ADMIN"
+            case 2:
+                return "USER"
+            case 2:
+                return "ALIADO"
+        }
+    }
 
     useEffect(() => {
         console.log(usuarioEditar)
@@ -46,7 +58,8 @@ const ModalEditarUsuario = ({setShowModalEditarUsuario,reload,setReload,usuarioE
             setFormData(
                 {
                     ...formData,
-                    nombre:usuarioEditar.fullname,
+                    id:usuarioEditar.id,
+                    fullname:usuarioEditar.fullname,
                     cedula:usuarioEditar.cedula,
                     email:usuarioEditar.email,
                     rol:usuarioEditar.rol
@@ -64,16 +77,16 @@ const ModalEditarUsuario = ({setShowModalEditarUsuario,reload,setReload,usuarioE
             <h3>Editar Usuario</h3>
             {/* <FontAwesomeIcon icon={faXmark} /> */}
             <form action="" onSubmit={handleSubmit}>
-                <div className={errors.nombre ? 'error-field' : ''}>
+                <div className={errors.fullname ? 'error-field' : ''}>
                     <label htmlFor="">Nombre</label>
                     <input
                         type="text"
                         placeholder='Nombre'
-                        value={formData.nombre}
+                        value={formData.fullname}
                         onChange={handleChange}
-                        name="nombre"
+                        name="fullname"
                     />
-                    {errors.nombre && <span className="error-message">{errors.nombre}</span>}
+                    {errors.fullname && <span className="error-message">{errors.fullname}</span>}
                 </div>
                 <div className={errors.cedula ? 'error-field' : ''}>
                     <label htmlFor="">Cedula</label>
@@ -99,7 +112,8 @@ const ModalEditarUsuario = ({setShowModalEditarUsuario,reload,setReload,usuarioE
                 </div>
                 <div className={errors.rol ? 'error-field' : ''}>
                     <label htmlFor="">Rol</label>
-                    <select name="" id="" value={formData.rol} onChange={handleChange}>
+                    <select name="rol" id="" onChange={handleChange}>
+                        <option defaultValue hidden>{formData.rol?getRol(formData.rol):'Seleccionar'}</option>
                         <option value="1">ADMIN</option>
                         <option value="2">USER</option>
                         <option value="3">ALIADO</option>

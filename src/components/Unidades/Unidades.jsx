@@ -30,7 +30,8 @@ const Unidades = () => {
   }
 
   const handleDelete =  (idUnidad)=>{
-    deleteUnidad(idUnidad)
+    if(confirm("¿Está seguro de eliminar el recurso?")){
+      deleteUnidad(idUnidad)
       .then((response)=>{
         if(response.success){
           notify('success','Unidad eliminada!','bottom-right')
@@ -39,6 +40,7 @@ const Unidades = () => {
           notify('error','Ocurrió un error...','bottom-right')
         }
       })
+    }
   }
 
   useEffect(() =>{

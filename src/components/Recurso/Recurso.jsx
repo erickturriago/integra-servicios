@@ -35,7 +35,8 @@ const Recursos = () => {
   }
 
   const handleDelete =  (idRecurso)=>{
-    deleteRecurso(idRecurso)
+    if(confirm("¿Está seguro de eliminar el recurso?")){
+      deleteRecurso(idRecurso)
       .then((response)=>{
         if(response.success){
           notify('success','Recurso eliminado!','bottom-right')
@@ -44,6 +45,7 @@ const Recursos = () => {
           notify('error','Ocurrió un error...','bottom-right')
         }
       })
+    }
   }
 
 

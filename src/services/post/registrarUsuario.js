@@ -1,4 +1,4 @@
-const ENDPOINT=`${import.meta.env.VITE_API_URL}/usuarios/registrar`
+const ENDPOINT=`${import.meta.env.VITE_API_URL}/auth/register`
 
 export function registrarUsuario (data) {
 
@@ -15,16 +15,25 @@ export function registrarUsuario (data) {
   const dataCompleta = {...data,fechaRegistro:fechaHoy,rol:'2'}
 
   console.log(JSON.stringify(dataCompleta))
+  const token = localStorage.getItem('token');
 
-
-  return fetch(`${ENDPOINT}`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(dataCompleta)
-  }).then(res => {
-    if (!res.ok) throw new Error('Response is NOT ok')
-    return true;
-  })
+  return (
+    fetch(`${ENDPOINT}`, { method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `${token}`
+        },
+        body: JSON.stringify(dataCompleta)
+    })
+        .then(async res => {
+            const responseData = await res.json()
+            console.log(responseData)
+            if (!res.ok) {
+                throw new Error(responseData.message || responseData.mensaje)
+            }
+            return { succes: true, responseData }
+        }).catch(error => {
+            return { succes: false, error: error.message }
+        })
+  )
 }

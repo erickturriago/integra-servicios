@@ -5,38 +5,33 @@ export const validarEditarUsuarioForm = (formData) => {
   console.log(formData)
 
   // Nombre validacion
-  if (!formData.nombre || formData.nombre.trim() === '') {
-    errors.nombre = 'Nombre es requerido.';
-  } else if (formData.nombre.length < 3) {
-    errors.nombre = 'Nombre debe tener al menos 3 caracteres';
+  if (!formData.fullname || formData.fullname.trim() === '') {
+    errors.fullname = 'Nombre es requerido.';
+  } else if (formData.fullname.length < 3) {
+    errors.fullname = 'Nombre debe tener al menos 3 caracteres';
   }
 
-  //Unidad validacion
-  if (!formData.tipo || formData.tipo === undefined) {
-    errors.tipo = 'Debe seleccionar una un tipo';
+  // Nombre validacion
+  if (!formData.cedula || formData.cedula === '') {
+    errors.cedula = 'Cedula es requerido.';
   }
-  
-  
-  //Horarios validación
-  const horaInicioDate = new Date();
-  horaInicioDate.setHours(formData.horaInicio.split(':')[0], formData.horaInicio.split(':')[1], 0);
-  const horaFinDate = new Date();
-  horaFinDate.setHours(formData.horaFinal.split(':')[0], formData.horaFinal.split(':')[1], 0);
-  // Comparar las horas
-  if(formData.horaInicio == "" || formData.horaFinal == ""){
-    errors.horario = 'Debe especificar hora de apertura y cierre.';
+  else if(isNaN(formData.cedula)){
+    errors.cedula = 'La cédula debe ser numérica.';
   }
-  if (horaFinDate < horaInicioDate) {
-    errors.horario = 'La hora de fin no puede ser antes de la hora inicio.';
+  else if(formData.cedula.length >= 10 ){
+    errors.cedula = 'La cédula no puede tener más de 10 digitos.';
   }
 
-  if (formData.tiempoMinimo == 0 || formData.tiempoMaximo == 0) {
-    errors.prestamo = 'Debe especificar el minimo y máximo.'
+  // Email validation (required, valid format)
+  if (!formData.email || formData.email.trim() === '') {
+    errors.email = 'Email es requerido.';
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    errors.email = 'Formato de email invalido.';
   }
 
-  //Dias disponibles validacion
-  if(formData.diasDisponibles.every((horario)=>horario==null)){
-    errors.dias = 'Debe especificar al menos un horario.'
+  // Email validation (required, valid format)
+  if(formData.rol == undefined){
+    errors.rol = 'Debe especificar un rol.'
   }
 
 
