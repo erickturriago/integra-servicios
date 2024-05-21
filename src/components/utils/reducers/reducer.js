@@ -1,5 +1,9 @@
 export const reducer = (state, action) => {
     switch(action.type) {
+        case 'SET_TOKEN': 
+            return {...state, token: action.payload}
+        case 'SET_USER_INFO': 
+            return {...state, userData: action.payload}
         case 'SET_LIST_RECURSOS': 
             return {...state, recursosList: action.payload}
         case 'SET_LIST_UNIDADES': 

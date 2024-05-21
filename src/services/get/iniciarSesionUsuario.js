@@ -9,13 +9,15 @@ export default function inicioSesion(data) {
     body: JSON.stringify(data)
   }).then(async res => {
       const token = res.headers.get('Authorization')//.replace('Bearer ',"");
+      const responseData = await res.json()
+      console.log(responseData)
 
       if (!res.ok) {
         throw new Error("Error en la solicitud");
       }
 
       localStorage.setItem('token',token)
-      return { success: true, token };
+      return { success: true, token ,responseData};
   }).catch(error => {
     return { success: false, error: error.message };
   });

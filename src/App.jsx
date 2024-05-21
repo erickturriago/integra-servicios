@@ -5,7 +5,6 @@ import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
-import Prestamo from './components/Prestamo/Prestamo';
 import Reserva from './components/Reserva/Reserva';
 import Recursos from './components/Recurso/Recurso'
 import InfoUsuario from './components/InfoUsuario/InfoUsuario';
@@ -35,8 +34,6 @@ function App() {
               <Route path='/info-usuario' element={<InfoUsuario />}></Route>
               <Route path="/recursos" element={<Recursos/>}></Route>
               <Route path="/reservas" element={<Reserva/>}></Route>
-              <Route path="/prestamos" element={<h1>prestamos</h1>}></Route>
-              <Route path="/devoluciones" element={<h1>devoluciones</h1>}></Route>
               <Route path="/usuarios" element={<Usuarios/>}></Route>
               <Route path="/unidades" element={<Unidades/>}></Route>
             </Route>

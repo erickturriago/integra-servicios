@@ -13,6 +13,7 @@ import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
 import { faCubes } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
+import { useIntegraStates } from '../utils/global.Context'
 
 const NavBar = () => {
 
@@ -25,10 +26,14 @@ const NavBar = () => {
         "usuarios": "unselected",
         "unidades": "unselected"
     })
-
+    const {state, dispatch} = useIntegraStates();
     const navigate = useNavigate();
 
     useEffect(() => {
+
+        const info_usuario = JSON.parse(localStorage.getItem('info_usuario'));
+        dispatch({type: 'SET_USER_INFO', payload: info_usuario})
+
         const lastSelectedButton = localStorage.getItem('lastSelectedButton');
         if (lastSelectedButton) {
             setBtnSelected(JSON.parse(lastSelectedButton));
@@ -66,6 +71,7 @@ const NavBar = () => {
     const cerrarSesion = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('lastSelectedButton');
+        localStorage.removeItem('info_usuario');
         navigate('/');
     };
 
@@ -77,11 +83,13 @@ const NavBar = () => {
                     <Link name='info-usuario' to='/info-usuario' className={`option ${btnSelected['info-usuario']}`} id='userOption' onClick={handleClick} ><FontAwesomeIcon icon={faUser} className='icono'/>Mi cuenta</Link>
                     <Link name='recursos' to='/recursos' className={`option ${btnSelected['recursos']}`} id='recursosOption' onClick={handleClick} ><FontAwesomeIcon icon={faList} className='icono' />Recursos</Link>
                     <Link name='reservas' to='/reservas' className={`option ${btnSelected['reservas']}`} id='reservasOption' onClick={handleClick}><FontAwesomeIcon icon={faCalendarCheck} className='icono' />Reservas</Link>
-                    <Link name='prestamos' to='/prestamos' className={`option ${btnSelected['prestamos']}`} id='prestamosOption' onClick={handleClick}><FontAwesomeIcon icon={faHandshake} className='icono' />Prestamos</Link>
-                    <Link name='devoluciones' to='/devoluciones' className={`option ${btnSelected['devoluciones']}`} id='devolucionesOption' onClick={handleClick}><FontAwesomeIcon icon={faRotateLeft} className='icono' />Devoluciones</Link>
-                    <Link name='usuarios' to='/usuarios' className={`option ${btnSelected['usuarios']}`} id='usuariosOption' onClick={handleClick}><FontAwesomeIcon icon={faUsers} className='icono' />Usuarios</Link>
-                    <Link name='unidades' to='/unidades' className={`option ${btnSelected['unidades']}`} id='unidadesOption' onClick={handleClick}><FontAwesomeIcon icon={faCubes} className='icono' />Unidades</Link>
-
+                    {
+                        state.userData && state.userData.rol == 'ROLE_ADMIN' &&
+                        <>
+                            <Link name='usuarios' to='/usuarios' className={`option ${btnSelected['usuarios']}`} id='usuariosOption' onClick={handleClick}><FontAwesomeIcon icon={faUsers} className='icono' />Usuarios</Link>
+                            <Link name='unidades' to='/unidades' className={`option ${btnSelected['unidades']}`} id='unidadesOption' onClick={handleClick}><FontAwesomeIcon icon={faCubes} className='icono' />Unidades</Link>
+                        </>
+                    }
                 </ul>
                 <Link to='/' className="option unselected" id='signOutOption' onClick={cerrarSesion} ><FontAwesomeIcon icon={faRightFromBracket} className='icono' />Cerrar Sesion</Link>
             </nav>

@@ -5,12 +5,14 @@ import { ToastContainer} from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faPencil} from '@fortawesome/free-solid-svg-icons'
 import './Usuarios.css'
+import ModalEditarUsuario from '../ModalEditarUsuario/ModalEditarUsuario';
 
 
 const Usuarios = () => {
 
   const {state, dispatch} = useIntegraStates()
-  
+  const [showModalEditarUsuario,setShowModalEditarUsuario] = useState(false)
+  const [usuarioEditar,setUsuarioEditar] = useState(null)
   const [reload,setReload] = useState(true)
 
   const getRol = (idRol)=>{
@@ -42,13 +44,14 @@ const Usuarios = () => {
 
   return (
     <div className='container-home'>
+      {showModalEditarUsuario && <ModalEditarUsuario setShowModalEditarUsuario={setShowModalEditarUsuario} reload={reload} setReload={setReload} usuarioEditar={usuarioEditar}/>}
       <div className='containerUsuarios'>
         <div className='list-usuarios'>
           <table className='table'>
             <thead>
               <tr>
                 <th>Nombre</th>
-                <th>DNI</th>
+                <th>Cedula</th>
                 <th>E-mail</th>
                 <th>Rol</th>
                 <th></th>
@@ -63,7 +66,7 @@ const Usuarios = () => {
                     <td>{usuario.cedula}</td>
                     <td>{usuario.email}</td>
                     <td>{getRol(usuario.rol)}</td>
-                    <td><FontAwesomeIcon icon={faPencil} className='reserva-icon'/></td>
+                    <td onClick={()=>{setUsuarioEditar(usuario);setShowModalEditarUsuario(true);}}><FontAwesomeIcon icon={faPencil} className='reserva-icon'/></td>
                     <td><FontAwesomeIcon icon={faTrashCan} className='reserva-icon'/></td>
                   </tr>
                 )
@@ -75,14 +78,6 @@ const Usuarios = () => {
       <ToastContainer/>
     </div>
   )
-  // return (
-  //   <div className='containerReservas'>
-  //     {/* {recursos.map((recurso,index)=>{
-  //       // return <RecursoReserva key={index} recurso={recurso}/>
-  //       return <></>
-  //     })} */}
-  //   </div>
-  // )
 }
 
 export default Usuarios

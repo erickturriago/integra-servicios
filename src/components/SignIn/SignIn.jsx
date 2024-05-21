@@ -4,6 +4,7 @@ import './SignIn.css'
 import {validarSignInForm} from "../utils/validacionForm"
 import { ToastContainer, toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import { useIntegraStates } from '../utils/global.Context';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const SignIn = () => {
     email: '',
     contraseña: ''
   });
+  const {state, dispatch} = useIntegraStates();
   const [errors, setErrors] = useState({});
 
   const notifySuccess = ()=>{
@@ -39,7 +41,10 @@ const SignIn = () => {
         .then((response) => {
             console.log(response)
             if(response.success){
-                notifySuccess();
+              dispatch({type: 'SET_USER_INFO', payload: response.responseData})
+              dispatch({type: 'SET_TOKEN', payload: response.token})
+              localStorage.setItem('info_usuario',JSON.stringify(response.responseData))
+              notifySuccess();
             }
             else{
               notifyError();

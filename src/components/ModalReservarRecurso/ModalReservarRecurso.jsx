@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './ModalEditarRecurso.css'
+import './ModalReservarRecurso.css'
 import getUnidades from '../../services/get/getUnidades';
 import { useIntegraStates } from '../utils/global.Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,10 +7,11 @@ import {faXmark} from '@fortawesome/free-solid-svg-icons'
 import { validarRecursoForm } from '../utils/validacionForms/validacionFormRegistroRecurso';
 import { actualizarRecurso } from '../../services/update/actualizarRecurso';
 
-const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setReload}) => {
+const ModalReservarRecurso = ({setShowModalReservarRecurso,recursoReservar,reload,setReload}) => {
     const [formData, setFormData] = useState({
         nombre: '',
         unidad:undefined,
+        recurso:undefined,
         horarioDisponible:[]
     });
     const [errors, setErrors] = useState({});
@@ -18,6 +19,9 @@ const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setR
     const [unidad,setUnidad] = useState(undefined)
     const [diasUnidad,setDiasUnidad] = useState([])
     const [diasSeleccionados,setDiasSeleccionados] = useState([])
+    const [date, setDate] = useState(new Date())
+    const [horaInicio, setHoraInicio] = useState(undefined)
+    const timeZone = 'America/Bogota'
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -35,7 +39,7 @@ const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setR
                 .then((response) => {
                     if(response.succes){
                         console.log(response)
-                        setShowModalEditarRecurso(false)
+                        setShowModalReservarRecurso(false)
                         setReload(!reload)
                     }
                 }) 
@@ -80,13 +84,13 @@ const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setR
     const getNumeroDia = (diaTexto)=>{
         let diaNumero = 0
         switch(diaTexto){
+            case 'Domingo': diaNumero = 0; break;
             case 'Lunes': diaNumero = 1; break;
             case 'Martes': diaNumero = 2; break;
             case 'Miércoles': diaNumero = 3; break;
             case 'Jueves': diaNumero = 4; break;
             case 'Viernes': diaNumero = 5; break;
             case 'Sábado': diaNumero = 6; break;
-            case 'Domingo': diaNumero = 7; break;
         }
         return diaNumero;
     }
@@ -94,37 +98,53 @@ const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setR
     const getNombreDia = (diaNumero)=>{
         let diaNombre = ''
         switch(diaNumero){
+            case 0: diaNombre = 'Domingo'; break;
             case 1: diaNombre = 'Lunes'; break;
             case 2: diaNombre = 'Martes'; break;
             case 3: diaNombre = 'Miércoles'; break;
             case 4: diaNombre = 'Jueves'; break;
             case 5: diaNombre = 'Viernes'; break;
             case 6: diaNombre = 'Sábado'; break;
-            case 7: diaNombre = 'Domingo'; break;
         }
         return diaNombre;
     }
 
+    const formatDate = (date, timeZone) => {
+        const options = {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          timeZone: timeZone
+        };
+        return new Intl.DateTimeFormat('es-CO', options).format(date);
+      };
+
     const generarListaHorario = (tipo)=>{
+        console.log(recursoReservar)
         var inicio = new Date('2000-01-01T' + unidad.horaInicio);
         var fin = new Date('2000-01-01T' + unidad.horaFinal);
 
         var horarios = [];
+        if(tipo=='inicio'){
+            var hora = inicio;
+            while (hora <= fin) {
+                var horaActual = hora.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+                horarios.push(horaActual);
 
-        var hora = inicio;
-        while (hora <= fin) {
-            var horaActual = hora.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
-            horarios.push(horaActual);
-
-            hora.setMinutes(hora.getMinutes() + unidad.tiempoMinimo);
+                hora.setMinutes(hora.getMinutes() + unidad.tiempoMinimo);
+            }
+            horarios.pop()
         }
-
-        if(tipo=='fin'){
-            horarios.shift()
-            return horarios;
+        var tiempoSuma = unidad.tiempoMinimo
+        if(tipo=='fin' && horaInicio){
+            var hora = horaInicio + tiempoSuma
+            while(hora <=fin && tiempoSuma != unidad.tiempoMaximo){
+                var horaActual = hora.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' })
+                horarios.push(horaActual);
+                hora.setMinutes(hora.getMinutes() + tiempoSuma)
+            }
         }
-        horarios.pop()
-        return horarios;
+        return horarios
     }
 
     const setHorarioDefault = ()=>{
@@ -150,10 +170,10 @@ const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setR
         }) 
 
         let recursoEntrada = {
-            nombre : recursoEditar.nombre,
-            unidad:recursoEditar.unidad.id,
+            nombre : recursoReservar.nombre,
+            unidad:recursoReservar.unidad.id,
             horarioDisponible:[],
-            id:recursoEditar.id
+            id:recursoReservar.id
         };
 
         setFormData((prevFormData) => ({
@@ -161,13 +181,13 @@ const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setR
             ...recursoEntrada,
           }));
 
-        setDiasUnidad(recursoEditar.unidad.diasDisponibles)
-        setUnidad(recursoEditar.unidad)
-        setDiasSeleccionados(recursoEditar.horarioDisponible.map((horario)=>horario.dia.nombre))
+        setDiasUnidad(recursoReservar.unidad.diasDisponibles)
+        setUnidad(recursoReservar.unidad)
+        setDiasSeleccionados(recursoReservar.horarioDisponible.map((horario)=>horario.dia.nombre))
 
         let horarioArr= []
-        console.log(recursoEditar.horarioDisponible)
-        recursoEditar.horarioDisponible.forEach((horario)=>{
+        console.log(recursoReservar.horarioDisponible)
+        recursoReservar.horarioDisponible.forEach((horario)=>{
             console.log(horario)
             // console.log(dia)
             horarioArr.push({
@@ -191,69 +211,41 @@ const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setR
     return (
     <div className='background-modal'>
         <div className='containerForm'>
-            <FontAwesomeIcon icon={faXmark} className='closeModal' onClick={()=>setShowModalEditarRecurso(false)}/>
-            <h3>Editar Recurso</h3>
+            <FontAwesomeIcon icon={faXmark} className='closeModal' onClick={()=>setShowModalReservarRecurso(false)}/>
+            <h3>Reservar Recurso</h3>
             {/* <FontAwesomeIcon icon={faXmark} /> */}
             <form action="" onSubmit={handleSubmit}>
                 <div className={errors.nombre ? 'error-field' : ''}>
                     <label htmlFor="">Nombre</label>
-                    <input
-                        type="text"
-                        placeholder='Nombre'
-                        value={formData.nombre}
-                        onChange={handleChange}
-                        name="nombre"
-                    />
-                    {errors.nombre && <span className="error-message">{errors.nombre}</span>}
+                    <h5>{recursoReservar.nombre}</h5>
                 </div>
                 <div className={errors.unidad ? 'error-field' : ''}>
                     <label htmlFor="">Unidad</label>
-                    <select onChange={handleUnidad} name="unidad" id="" value={unidad?unidad.nombre:''}>
-                        <option defaultValue hidden>Seleccionar</option>
-                        {state.unidadesList.map((unidad)=>{
-                            return(
-                                <option key={unidad.id}>{unidad.nombre}</option>
-                            )
-                        })}
-                    </select>
-                    {errors.unidad && <span className="error-message">{errors.unidad}</span>}
+                    <h5>{recursoReservar.unidad.nombre}</h5>
                 </div>
                 { unidad && <div className={errors.horario ? 'error-field' : ''}>
                     <label htmlFor="">Horario <span className='btn-default' onClick={setHorarioDefault}>Default</span></label>
-                    <div className='diasDisponible'>
-                        {diasUnidad.map((dia)=>{
-                            return (
-                                <span onClick={handleDia} key={dia.id} className={formData.horarioDisponible.filter((d)=>d.dia==dia.id).length>0?'diaSeleccionado':''}>{dia.nombre}</span>
-                            )
-                        })}
-                    </div>
-                    {formData.horarioDisponible.length>0 && <div className='horasDisponible'>
-                        {formData.horarioDisponible.map((horario,index)=>{
-                            return(
-                                <div key={index}>
-                                    <span key={index}>{getNombreDia(horario.dia)}</span>
-                                    <select name="" id="" onChange={(e)=>{handleChangeHoraInicio(e,horario)}}>
-                                        <option defaultValue hidden>{horario.horaInicio?horario.horaInicio:'Inicio'}</option>
-                                        {generarListaHorario('inicio').map((horario,index)=>{
-                                            return(
-                                                <option key={index}>{horario}</option>
-                                            )
-                                        })}
-                                    </select>
-                                    :
-                                    <select name="" id="" onChange={(e)=>{handleChangeHoraFin(e,horario)}}>
-                                        <option defaultValue hidden>{horario.horaFin!=''?horario.horaFin:'Fin'}</option>
-                                        {generarListaHorario('fin').map((horario,index)=>{
-                                            return(
-                                                <option key={index}>{horario}</option>
-                                            )
-                                        })}
-                                    </select>
-                                </div>
-                            )
-                        })}
+                    <input type="date" value={date.toISOString().split('T')[0]} onChange={(e) => setDate(new Date(e.target.value))}/>
+                    {recursoReservar.horarioDisponible.some(horario => horario.dia.id === date.getDay()) && <div className='horasDisponible'>
+                        <div>
+                            <span>{getNombreDia(date.getDay())}</span>
+                            <select name="" id="" onChange={(e)=>{setHoraInicio(e.target.value)}}>
+                            {generarListaHorario('inicio').map((horario,index)=>{
+                                return(
+                                    <option key={index} >{horario}</option>
+                                )
+                            })}
+                            </select>
+                            :
+                            <select name="" id="">
+                            {generarListaHorario('fin').map((horario,index)=>{
+                                return(
+                                    <option key={index}>{horario}</option>
+                                )
+                            })}
+                            </select>
+                        </div>
                     </div>}
-                    {errors.horario && <span className="error-message">{errors.horario}</span>}
                 </div>}
                 <div>
                     <button className='btn-signin'>Guardar</button>
@@ -264,4 +256,4 @@ const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setR
   )
 }
 
-export default ModalEditarRecurso
+export default ModalReservarRecurso

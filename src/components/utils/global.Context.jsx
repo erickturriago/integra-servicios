@@ -7,6 +7,7 @@ export const useIntegraStates = () => useContext(IntegraContext)
 
 const initialState = {
     token:null,
+    userData:null,
     recursosList:[],
     unidadesList:[],
     reservasList:[],

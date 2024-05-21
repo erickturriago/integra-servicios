@@ -4,9 +4,9 @@ import getUnidades from '../../services/get/getUnidades';
 import { useIntegraStates } from '../utils/global.Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faXmark} from '@fortawesome/free-solid-svg-icons'
-import { validarRecursoForm } from '../utils/reducers/validacionForms/validacionFormRegistroRecurso';
 import { registrarUnidad } from '../../services/post/registrarUnidad';
 import { actualizarUnidad } from '../../services/update/actualizarUnidad';
+import { validarUnidadForm } from '../utils/validacionForms/validacionFormRegistroUnidad';
 
 const ModalUnidad = ({setShowModalUnidad,idUnidadEditar,reload,setReload}) => {
     const [formData, setFormData] = useState({
@@ -90,7 +90,7 @@ const ModalUnidad = ({setShowModalUnidad,idUnidadEditar,reload,setReload}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(formData)
-        const validationErrors = validarRecursoForm(formData);
+        const validationErrors = validarUnidadForm(formData);
         console.log(validationErrors)
         setErrors(validationErrors);
 

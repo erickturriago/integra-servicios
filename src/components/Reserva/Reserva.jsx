@@ -11,7 +11,7 @@ const Reserva = () => {
 
   const {state, dispatch} = useIntegraStates()
   
-  const [reload,setReload] = useState(true)
+  const [reload, setReload] = useState(true)
 
   useEffect(() =>{
     getReservas()

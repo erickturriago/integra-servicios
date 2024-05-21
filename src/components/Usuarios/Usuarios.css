@@ -31,3 +31,11 @@
     color: #f35587;
     cursor: pointer;
 }
+
+
+.containerUsuarios .table select{
+    /* border: 1px solid red; */
+    margin: 5px 0 5px 0;
+    border-radius: 5px;
+    /* border: none; */
+}

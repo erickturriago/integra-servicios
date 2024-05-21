@@ -4,7 +4,7 @@ import getUnidades from '../../services/get/getUnidades';
 import { useIntegraStates } from '../utils/global.Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faXmark} from '@fortawesome/free-solid-svg-icons'
-import { validarRecursoForm } from '../utils/reducers/validacionForms/validacionFormRegistroRecurso';
+import { validarRecursoForm } from '../utils/validacionForms/validacionFormRegistroRecurso';
 import { registrarRecurso } from '../../services/post/registrarRecurso';
 
 const ModalCrearRecurso = ({setShowModalCrearRecurso,reload,setReload}) => {
