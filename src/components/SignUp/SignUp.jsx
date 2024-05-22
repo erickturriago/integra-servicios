@@ -16,11 +16,15 @@ const SignUp = () => {
   });
   const [errors, setErrors] = useState({});
 
-  const notifySuccess = ()=>{
-    console.log("Noficiando success")
-      toast.success("Register exitoso!",
-      {position:"top-right",autoClose: 1000});
-      // {position:"top-right",autoClose: 1000,onClose:()=>navigate('/login')});
+  const notify = (orden,mensaje,posicion)=>{
+    if(orden=='success'){
+      toast.success(mensaje,
+      {position:posicion,autoClose: 500,onClose:()=>navigate('/login')});
+    }
+    else{
+      toast.error(mensaje,
+      {position:posicion,autoClose: 1000});
+    }
   }
 
   const handleChange = (event) => {
@@ -37,8 +41,11 @@ const SignUp = () => {
       registrarUsuario(formData)
         .then((response) => {
             console.log(response)
-            if(response){
-                notifySuccess();
+            if(response.succes){
+              notify('success','Usuario creado!','bottom-right')
+            }
+            else{
+              notify('error',response.error,'bottom-right')
             }
         }) 
     }

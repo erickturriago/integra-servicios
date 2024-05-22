@@ -36,7 +36,7 @@ export const validarUnidadForm = (formData) => {
 
   //Dias disponibles validacion
   if(formData.diasDisponibles.every((horario)=>horario==null)){
-    errors.dias = 'Debe especificar al menos un horario.'
+    errors.dias = 'Debe especificar al menos un dia.'
   }
 
 

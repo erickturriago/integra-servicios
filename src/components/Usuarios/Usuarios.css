@@ -24,6 +24,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 93vh;
+    overflow-y: auto;
 }
 
 .containerUsuarios .reserva-icon{
