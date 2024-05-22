@@ -18,7 +18,7 @@ export const validarEditarUsuarioForm = (formData) => {
   else if(isNaN(formData.cedula)){
     errors.cedula = 'La cédula debe ser numérica.';
   }
-  else if(formData.cedula.length >= 10 ){
+  else if(formData.cedula.length > 10 ){
     errors.cedula = 'La cédula no puede tener más de 10 digitos.';
   }
 

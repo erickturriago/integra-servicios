@@ -13,6 +13,7 @@ export function actualizarUsuario (data) {
         body: JSON.stringify(data)
     })
         .then(async res => {
+            console.log(res)
             const responseData = await res.json()
             console.log(responseData)
             if (!res.ok) {
