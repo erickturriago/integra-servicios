@@ -24,6 +24,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 93vh;
+    overflow-y: auto;
 }
 
 .containerReservas .reserva-icon{
@@ -31,3 +33,4 @@
     color: #f35587;
     cursor: pointer;
 }
+

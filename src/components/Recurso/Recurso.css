@@ -1,7 +1,7 @@
 .container-home{
     display: flex;
     /* background-color: red; */
-    width: 100%;
+    /* width: 20%; */
     margin: 1rem;
     border-radius: 10px;
     display: flex;
@@ -11,12 +11,15 @@
     -moz-box-shadow: 0 0 5px 1px #a3a3a3; */
     box-shadow: 0 0 10px 1px #c6c6c6;
     position: relative;
+    overflow-y: auto;
 }
 
 .containerRecursos{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 93vh;
+    overflow-y: auto;
 }
 
 

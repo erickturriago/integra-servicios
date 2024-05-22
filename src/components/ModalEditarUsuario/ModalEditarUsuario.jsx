@@ -47,7 +47,7 @@ const ModalEditarUsuario = ({setShowModalEditarUsuario,reload,setReload,usuarioE
                 return "ADMIN"
             case 2:
                 return "USER"
-            case 2:
+            case 3:
                 return "ALIADO"
         }
     }
