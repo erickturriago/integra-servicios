@@ -15,24 +15,24 @@ export function registrarUsuario (data) {
   const dataCompleta = {...data,fechaRegistro:fechaHoy,rol:'2'}
 
   console.log(JSON.stringify(dataCompleta))
-  const token = localStorage.getItem('token');
 
   return (
     fetch(`${ENDPOINT}`, { method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          'Authorization': `${token}`
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(dataCompleta)
     })
         .then(async res => {
+            console.log(res)
             const responseData = await res.json()
-            console.log(responseData)
+            
             if (!res.ok) {
-                throw new Error(responseData.message || responseData.mensaje)
+                throw new Error(responseData.mensaje)
             }
             return { succes: true, responseData }
         }).catch(error => {
+            console.log(error)
             return { succes: false, error: error.message }
         })
   )

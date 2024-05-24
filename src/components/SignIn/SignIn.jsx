@@ -15,15 +15,15 @@ const SignIn = () => {
   const {state, dispatch} = useIntegraStates();
   const [errors, setErrors] = useState({});
 
-  const notifySuccess = ()=>{
-      toast.success("Login exitoso!",
-      {position:"top-right",autoClose: 1000,onClose:()=>navigate('/recursos')});
-  }
-
-  const notifyError = ()=>{
-    console.log("Noficiando success")
-      toast.error("Credenciales inválidas",
-      {position:"top-right",autoClose: 1000});
+  const notify = (orden,mensaje,posicion)=>{
+    if(orden=='success'){
+      toast.success(mensaje,
+      {position:posicion,autoClose: 500,onClose:()=>navigate('/recursos')});
+    }
+    else{
+      toast.error(mensaje,
+      {position:posicion,autoClose: 1000});
+    }
   }
 
   const handleChange = (event) => {
@@ -40,14 +40,15 @@ const SignIn = () => {
       inicioSesionService(formData)
         .then((response) => {
             console.log(response)
-            if(response.success){
+            if(response.succes){
               dispatch({type: 'SET_USER_INFO', payload: response.responseData})
-              dispatch({type: 'SET_TOKEN', payload: response.token})
+              dispatch({type: 'SET_TOKEN', payload: response.responseData.token})
               localStorage.setItem('info_usuario',JSON.stringify(response.responseData))
-              notifySuccess();
+              localStorage.setItem('token',response.responseData.token);
+              notify('success','Login exitoso!','top-right')
             }
             else{
-              notifyError();
+              notify('error',response.error,'top-right')
             }
         }) 
     }

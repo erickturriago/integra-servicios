@@ -7,18 +7,17 @@ export default function inicioSesion(data) {
   return fetch(`${ENDPOINT}`, {
     method: 'POST',
     body: JSON.stringify(data)
-  }).then(async res => {
-      const token = res.headers.get('Authorization')//.replace('Bearer ',"");
+  })
+    .then(async res => {
+      console.log(res)
       const responseData = await res.json()
-      console.log(responseData)
-
+      
       if (!res.ok) {
-        throw new Error("Error en la solicitud");
+          throw new Error(responseData.mensaje)
       }
-
-      localStorage.setItem('token',token)
-      return { success: true, token ,responseData};
+      return { succes: true, responseData }
   }).catch(error => {
-    return { success: false, error: error.message };
-  });
+      console.log(error)
+      return { succes: false, error: error.message }
+  })
 }
