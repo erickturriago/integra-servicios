@@ -70,6 +70,7 @@ const Reserva = () => {
                 <th>Recurso</th>
                 <th>Usuario</th>
                 <th>Fecha Reserva</th>
+                <th>Fecha Creacion</th>
                 <th>Hora Inicio</th>
                 <th>Hora Fin</th>
                 <th>Estado</th>
@@ -85,6 +86,7 @@ const Reserva = () => {
                     <td>{reserva.recurso.nombre}</td>
                     <td>{reserva.usuario.fullname}</td>
                     <td>{reserva.fechaReserva}</td>
+                    <td>{reserva.fechaCreacion}</td>
                     <td>{reserva.horaInicio}</td>
                     <td>{reserva.horaFin}</td>
                     <td>{reserva.estado}</td>
