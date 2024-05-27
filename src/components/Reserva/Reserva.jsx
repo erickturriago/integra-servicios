@@ -78,7 +78,7 @@ const Reserva = () => {
               </tr>
             </thead>
             <tbody>
-              {state.reservasList.sort((a, b) => a.id - b.id).map((reserva)=>{
+              {state.reservasList.sort((a, b) => b.id - a.id).map((reserva)=>{
                 return(
                   <tr key={reserva.id}>
                     <th>{reserva.id}</th>
