@@ -15,14 +15,13 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
     const [reservasRecurso, setReservasRecurso] = useState([])
     const [horasFin, setHorasFin] = useState([])
     const [horasInicio, setHorasInicio] = useState([])
-    const [idDiaSeleccionado,setIdDiaSeleccionado] = useState(undefined);
     const timeZone = 'America/Bogota'
 
     const [formData, setFormData] = useState({
         idRecurso: recursoReservar.id,
         idUsuario: state.userData.id,
         estado: 'Activa',
-        fechaReserva: undefined,
+        fechaCreacion: undefined,
         horaInicio: '',
         horaFin: '',
     });
@@ -43,7 +42,7 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
             registrarReserva(formData)
             .then((response) => {
                 if (response.succes) {
-                    alert("Reserva registrada exitosamente.")
+                    console.log(response)
                     setShowModalReservarRecurso(false)
                     setReload(!reload)
                 }
@@ -87,82 +86,57 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
     };
 
     const generarListaHorario = (tipo) => {
-        console.log(currentDate)
-
-        let horario = recursoReservar.horarioDisponible.find((horario)=>horario.dia.id == currentDate.getDay()==0?7:currentDate.getDay);
-
-        let horaInicio = horario.horaInicio;
-        let horaFin = horario.horaFin;
-
-        let horaAux = horaInicio;
-        let minutosAumento = recursoReservar.unidad.tiempoMinimo;
-        let horasArr = []
-
+        var inicio = new Date('2000-01-01T' + recursoReservar.unidad.horaInicio);
+        var fin = new Date('2000-01-01T' + recursoReservar.unidad.horaFinal);
+        let reservas = []
+        for (let reserva of reservasRecurso) {
+            let date = new Date(new Date(reserva.fechaInicio).getTime() + (300 * 60 * 1000))
+            if (currentDate.getFullYear() === date.getFullYear() &&
+                currentDate.getMonth() === date.getMonth() &&
+                currentDate.getDate() === date.getDate()) {
+                reservas.push({ horaInicio: reserva.horaInicio, horaFin: reserva.horaFin })
+            }
+        }
+        // console.log(`reservas: ${JSON.stringify(reservas)}`)
+        var horarios = [];
         if (tipo == 'inicio') {
-            while(horaAux!==horaFin){
-                let reserva = null
-                reserva = reservasRecurso.find((recurso)=>recurso.horaInicio==horaAux);
-
-                if(reserva){
-                    horaAux=reserva.horaFin;
+            let hora = inicio;
+            //alert(hora)
+            while (hora <= fin) {
+                var horaActual = hora.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+                if (!reservas.some(reserva => reserva.horaInicio == horaActual.replace(' ', ''))) {
+                    horarios.push(horaActual)
+                } else {
+                    let reserva = reservas.find(reserva => reserva.horaInicio == horaActual.replace(' ', ''))
+                    hora.setHours(reserva.horaFin.split(':')[0])
+                    hora.setMinutes(reserva.horaFin.split(':')[1] - recursoReservar.unidad.tiempoMinimo)
                 }
-                else{
-                    horasArr.push(horaAux);
-
-                    const [horas, minutos] = horaAux.split(':').map(Number);
-                    let minutosTotales = horas * 60 + minutos;
-                    minutosTotales += minutosAumento;
-                    const nuevasHoras = Math.floor(minutosTotales / 60) % 24;
-                    const nuevosMinutos = minutosTotales % 60;
-                    horaAux = `${nuevasHoras.toString().padStart(2, '0')}:${nuevosMinutos.toString().padStart(2, '0')}`;
-                }
+                hora.setMinutes(hora.getMinutes() + recursoReservar.unidad.tiempoMinimo);
             }
-            return horasArr;
+            horarios.pop()
         }
-
-        let horarioFinArr = []
         if (tipo == 'fin' && formData.horaInicio) {
-            const [horas, minutos] = formData.horaInicio.split(':').map(Number);
-            let minutosTotales = horas * 60 + minutos;
-            minutosTotales += minutosAumento;
-            const nuevasHoras = Math.floor(minutosTotales / 60) % 24;
-            const nuevosMinutos = minutosTotales % 60;
-            horaAux = `${nuevasHoras.toString().padStart(2, '0')}:${nuevosMinutos.toString().padStart(2, '0')}`;
-
-            while(true){
-                let reserva = null
-                reserva = reservasRecurso.find((recurso)=>recurso.horaInicio==horaAux);
-                if(reserva){
-                    horarioFinArr.push(horaAux);
-                    return horarioFinArr;
+            let tiempoSuma = recursoReservar.unidad.tiempoMinimo
+            let hora = new Date('2000-01-01T' + formData.horaInicio)
+            hora.setMinutes(hora.getMinutes() + tiempoSuma)
+            while (hora <= fin && tiempoSuma <= recursoReservar.unidad.tiempoMaximo) {
+                let horaActual = hora.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' })
+                if (!formData.horaFin) {
+                    setFormData({ ...formData, 'horaFin': horaActual })
                 }
-                else{
-                    let multiplo = recursoReservar.unidad.tiempoMaximo / recursoReservar.unidad.tiempoMinimo;
-                    if(horarioFinArr.length==multiplo){
-                        return horarioFinArr;
-                    }
-                    horarioFinArr.push(horaAux);
+                horarios.push(horaActual);
+                hora.setMinutes(hora.getMinutes() + recursoReservar.unidad.tiempoMinimo)
+                tiempoSuma += recursoReservar.unidad.tiempoMinimo
+                if (reservas.some(reserva => reserva.horaInicio == horaActual.replace(' ', ''))) {
+                    break
                 }
-
-                if(horaAux==horaFin){
-                    return horarioFinArr;
-                }
-
-                const [horas, minutos] = horaAux.split(':').map(Number);
-                let minutosTotales = horas * 60 + minutos;
-                minutosTotales += minutosAumento;
-                const nuevasHoras = Math.floor(minutosTotales / 60) % 24;
-                const nuevosMinutos = minutosTotales % 60;
-                horaAux = `${nuevasHoras.toString().padStart(2, '0')}:${nuevosMinutos.toString().padStart(2, '0')}`;
-        
             }
-            return horarioFinArr;
         }
-        return []
+        console.log(recursoReservar)
+        return horarios
     }
 
     useEffect(() => {
-        console.log(formData)
         getReservasRecurso(recursoReservar.id)
             .then((response) => {
                 if (response.succes) {
@@ -175,13 +149,11 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
     useEffect(()=>{
         console.log("useEffect current date");
         console.log(recursoReservar);
-        const fechaActualDate = new Date(new Date().getTime() - (5 * 60 * 60 * 1000));
-        fechaActualDate.setHours(0, 0, 0, 0);
-        console.log(fechaActualDate)
-
-        setCurrentDate(fechaActualDate);
-        setFormData({ ...formData, 'fechaReserva':formatearFecha(fechaActualDate)})
-        console.log(formatearFecha(fechaActualDate));
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0); // Ajusta la hora a medianoche para evitar diferencias de zona horaria
+        setCurrentDate(new Date(formatearFecha(hoy)));
+        setFormData({ ...formData, 'fechaCreacion':formatearFecha(hoy)})
+        console.log(formatearFecha(hoy));
 
     },[reservasRecurso])
 
@@ -201,23 +173,25 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
                         <label htmlFor="">Unidad</label>
                         <h5>{recursoReservar.unidad.nombre}</h5>
                     </div>
-                    <div className={errors.fechaReserva ? 'error-field' : ''}>
+                    <div className={errors.fechaCreacion ? 'error-field' : ''}>
                         <div className='containerCalendar'>
                             <label htmlFor="">Fecha</label>
-                            {currentDate && <input type="date" value={currentDate.toISOString().split('T')[0]} onChange={(e) => { setCurrentDate(new Date(e.target.valueAsDate.getTime() + (300 * 60 * 1000)));setFormData({ ...formData, 'fechaReserva': formatearFecha(new Date(e.target.valueAsDate.getTime() + (300 * 60 * 1000)) )})}} />}
+                            {currentDate && <input type="date" value={currentDate.toISOString().split('T')[0]} onChange={(e) => { setCurrentDate(new Date(e.target.valueAsDate.getTime() + (300 * 60 * 1000)));setFormData({ ...formData, 'fechaCreacion': formatearFecha(new Date(e.target.valueAsDate.getTime() + (300 * 60 * 1000)) )})}} />}
                         </div>
-                        {errors.fechaReserva && <span className="error-message">{errors.fechaReserva}</span>}
+                        {errors.fechaCreacion && <span className="error-message">{errors.fechaCreacion}</span>}
                     </div>
-                    <div className={errors.fechaReserva ? 'error-field' : ''}>
+                    <div className={errors.fechaCreacion ? 'error-field' : ''}>
                         <div className='containerCalendar'>
                             <label htmlFor="">Horario</label>
-                            {currentDate && recursoReservar.horarioDisponible.map((horario)=>horario.dia.id).includes(currentDate.getDay()==0?7:currentDate.getDay()) && 
+                            {currentDate && recursoReservar.horarioDisponible.some(horario => horario.dia.id === currentDate.getDay()) && 
                             <div className='horasDisponible'>
                                 <div>
                                     <span>{getNombreDia(currentDate.getDay())}</span>
                                     <select name="horaInicio" id="" onChange={(e) => handleChange(e)}>
-                                        <option defaultValue hidden>Seleccionar</option>
                                         {generarListaHorario('inicio').map((horario, index) => {
+                                            if (!formData.horaInicio && index === 0) {
+                                                setFormData({ ...formData, 'horaInicio': horario })
+                                            }
                                             return (
                                                 <option key={index} >{horario}</option>
                                             )
@@ -225,7 +199,6 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
                                     </select>
                                     :
                                     <select name="horaFin" id="" onChange={(e) => handleChange(e)}>
-                                        <option defaultValue hidden>Seleccionar</option>
                                         {generarListaHorario('fin').map((horario, index) => {
                                             return (
                                                 <option key={index}>{horario}</option>

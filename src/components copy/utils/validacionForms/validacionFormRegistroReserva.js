@@ -6,21 +6,20 @@ export const validarReservaForm = (formData,recursoReservar) => {
     console.log(recursoReservar)
 
     // Validar si la fecha no es vacia
-    if (!formData.fechaReserva || formData.fechaReserva.trim() === '') {
-        errors.fechaReserva = 'Nombre es requerido.';
+    if (!formData.fechaCreacion || formData.fechaCreacion.trim() === '') {
+        errors.fechaCreacion = 'Nombre es requerido.';
     }
 
-    const fechaCompararDate = new Date(formData.fechaReserva);
+    const fechaCompararDate = new Date(formData.fechaCreacion);
     fechaCompararDate.setDate(fechaCompararDate.getDate()+1);
     fechaCompararDate.setHours(0, 0, 0, 0);
 
     const fechaActualDate = new Date(new Date().getTime() - (5 * 60 * 60 * 1000));
     fechaActualDate.setHours(0, 0, 0, 0);
-    console.log(fechaActualDate)
 
     //Validar si la fecha no es antes del presente
     if (fechaCompararDate < fechaActualDate) {
-        errors.fechaReserva = 'La fecha no puede anterior al día de hoy.';  
+        errors.fechaCreacion = 'La fecha no puede ser anterior antes de hoy';  
     }
 
     const diasRecurso = recursoReservar.horarioDisponible.map((horario)=>horario.dia.id);
@@ -33,7 +32,7 @@ export const validarReservaForm = (formData,recursoReservar) => {
     console.log(diaSeleccionado)
     //Validar si el recurso está disponible el día seleccionado
     if(!diasRecurso.includes(diaSeleccionado)){
-        errors.fechaReserva = 'Recurso no disponible el día seleccionado';  
+        errors.fechaCreacion = 'Recurso no disponible el día seleccionado';  
     }
 
 
@@ -44,7 +43,7 @@ export const validarReservaForm = (formData,recursoReservar) => {
     const horaFinDate = new Date();
     horaFinDate.setHours(formData.horaFin.split(':')[0], formData.horaFin.split(':')[1], 0);
     // Comparar las horas
-    if(!errors.fechaReserva){
+    if(!errors.fechaCreacion){
         if(formData.horaInicio == '' || formData.horaFin == ''){
             errors.horario = 'Debe especificar hora de inicio y fin.';
         }

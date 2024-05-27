@@ -12,7 +12,7 @@
 }
 
 .containerForm{
-    width: 500px;
+    width: 750px;
     background-color: white;
     border-radius: 10px;
     padding: 2rem 2rem 2rem 2rem;
@@ -23,6 +23,14 @@
     width: 100%;
     display: flex;
     /* gap: 10px; */
+}
+
+.containerForm .closeModal{
+    font-size: 2rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
 }
 
 .containerForm select{
@@ -40,57 +48,38 @@
     border-color: transparent; /* Hace que el borde sea transparente */
 }
 
-
-.diasDisponible{
+.containerForm .divDisponibilidad{
     display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
+    gap: 20px;
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 10px;
     padding: 10px;
     justify-content: center;
+    align-items: center;
+}
+.containerForm .divDisponibilidad select{
+    text-align: center;
+    width: auto;
 }
 
-.horasDisponible{
+
+.containerForm .divHorario{
     display: flex;
-    flex-wrap: wrap;
-    /* flex-direction: column; */
+    /* flex-wrap: wrap; */
+    gap: 20px;
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 10px;
     padding: 10px;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    gap: 10px;
-}
-.containerCalendar{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-.containerCalendar input{
-    width: auto;
-    display: inline-block;
-    max-width: none ;
-}
-
-
-.horasDisponible div{
-    margin: 0;
-    display: flex;
-    gap: 10px;
-    border: 1px dashed rgb(136, 136, 136);
-    border-radius: 5px;
-    padding: 5px 10px 5px 10px;
     align-items: center;
 }
 
-.horasDisponible div select{
-    height: 30px;
+.containerForm .divHorario select{
+    text-align: center;
     width: auto;
 }
 
-.diasDisponible span{
+.containerForm .diasDisponible span{
     border: 1px dashed black;
     border-radius: 5px;
     padding: 5px 15px 5px 15px;
@@ -98,33 +87,7 @@
     transition: all .2s ease;
 }
 
-.diasDisponible span:hover{
+.containerForm .diasDisponible .selected{
     background-color: white;
     border: 1px solid black;
-}
-
-
-.diasDisponible .diaSeleccionado{
-    background-color: white;
-    border: 1px solid black;
-}
-
-.containerForm .btn-default{
-    /* border: 1px solid red; */
-    padding: 5px;
-    border-radius: 5px;
-    margin-left: 5px;
-    background-color: lightgrey;
-    cursor: pointer;
-    font-size: 12px;
-    /* font-size: .5rem; */
-}
-
-
-.containerForm .closeModal{
-    font-size: 2rem;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    cursor: pointer;
 }
