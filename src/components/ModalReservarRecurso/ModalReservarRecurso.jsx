@@ -166,7 +166,7 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
         getReservasRecurso(recursoReservar.id)
             .then((response) => {
                 if (response.succes) {
-                    setReservasRecurso(response.responseData)
+                    setReservasRecurso(response.responseData.filter((r)=>r.estado=="Activa"))
                 }
             })
         console.log(`formData: ${formData}`)

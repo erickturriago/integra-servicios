@@ -31,6 +31,8 @@ const NavBar = () => {
 
     useEffect(() => {
 
+        console.log("Renderiza navbar")
+
         const info_usuario = JSON.parse(localStorage.getItem('info_usuario'));
         dispatch({type: 'SET_USER_INFO', payload: info_usuario})
 
@@ -38,7 +40,6 @@ const NavBar = () => {
         if (lastSelectedButton) {
             setBtnSelected(JSON.parse(lastSelectedButton));
         } else {
-            // Si no hay ningún botón seleccionado previamente, seleccionar "recursos" por defecto
             setBtnSelected({
                 ...btnSelected,
                 "recursos": "selected"
