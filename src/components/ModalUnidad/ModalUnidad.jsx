@@ -102,6 +102,7 @@ const ModalUnidad = ({setShowModalUnidad,idUnidadEditar,reload,setReload}) => {
                 .then((response) => {
                     if(response.succes){
                         console.log(response)
+                        alert("Usuario registrada correctamente.")
                         setShowModalUnidad(false)
                         setReload(!reload);
                     }
@@ -111,6 +112,7 @@ const ModalUnidad = ({setShowModalUnidad,idUnidadEditar,reload,setReload}) => {
                 actualizarUnidad(formData)
                 .then((response) => {
                     if(response.succes){
+                        alert("Unidad modificada correctamente.")
                         console.log(response)
                         setShowModalUnidad(false)
                         setReload(!reload);

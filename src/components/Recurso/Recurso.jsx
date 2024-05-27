@@ -91,7 +91,7 @@ const Recursos = () => {
                   <tr key={recurso.id}>
                     <td>{recurso.id}</td>
                     <td>{recurso.nombre}</td>
-                    <td>Universitario</td>
+                    <td>{recurso.unidad.tipo}</td>
                     <td>{recurso.unidad.nombre}</td>
                     {state.userData && state.userData.rol == 'ROLE_ADMIN'?<>
                     <td onClick={()=>{setRecursoEditar(recurso);setShowModalEditarRecurso(true);}}><FontAwesomeIcon icon={faPencil} className='reserva-icon'/></td>

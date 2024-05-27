@@ -37,6 +37,7 @@ const ModalCrearRecurso = ({setShowModalCrearRecurso,reload,setReload}) => {
                 .then((response) => {
                     if(response.succes){
                         console.log(response)
+                        alert("Recurso registrado exitosamente.")
                         setShowModalCrearRecurso(false)
                         setReload(!reload)
                     }

@@ -27,9 +27,24 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
         horaFin: '',
     });
 
-    const handleChange = (event) => {
-        setFormData({ ...formData, [event.target.name]: event.target.value });
-        console.log(`formData: ${JSON.stringify(formData)}`)
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        // Actualizar el campo específico basado en el evento
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+
+        // Si el campo cambiado es 'horaInicio', resetea 'horaInicio'
+        if (name === 'horaInicio') {
+            console.log("Cambiando hora fin vacio")
+            setFormData(prevState => ({
+                ...prevState,
+                horaFin: ''
+            }));
+            console.log(formData)
+        }
     };
     
 
@@ -87,7 +102,6 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
     };
 
     const generarListaHorario = (tipo) => {
-        console.log(currentDate)
 
         let horario = recursoReservar.horarioDisponible.find((horario)=>horario.dia.id == currentDate.getDay()==0?7:currentDate.getDay);
 
@@ -215,17 +229,17 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
                             <div className='horasDisponible'>
                                 <div>
                                     <span>{getNombreDia(currentDate.getDay())}</span>
-                                    <select name="horaInicio" id="" onChange={(e) => handleChange(e)}>
-                                        <option defaultValue hidden>Seleccionar</option>
+                                    <select name="horaInicio" id="" onChange={handleChange}>
+                                        <option defaultValue hidden>{formData.horaInicio!=''?formData.horaInicio:'Inicio'}</option>
                                         {generarListaHorario('inicio').map((horario, index) => {
                                             return (
-                                                <option key={index} >{horario}</option>
+                                                <option key={index} value={horario}>{horario}</option>
                                             )
                                         })}
                                     </select>
                                     :
-                                    <select name="horaFin" id="" onChange={(e) => handleChange(e)}>
-                                        <option defaultValue hidden>Seleccionar</option>
+                                    <select name="horaFin" id="" onChange={handleChange} value={formData.horaFin}>
+                                        <option defaultValue hidden>{formData.horaFin!=""?formData.horaFin:'Fin'}</option>
                                         {generarListaHorario('fin').map((horario, index) => {
                                             return (
                                                 <option key={index}>{horario}</option>

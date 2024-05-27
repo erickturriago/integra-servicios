@@ -36,34 +36,45 @@ export const validarReservaForm = (formData,recursoReservar) => {
         errors.fechaReserva = 'Recurso no disponible el día seleccionado';  
     }
 
-
     //Validacion de horas
     //Horarios validación
     const horaInicioDate = new Date();
     horaInicioDate.setHours(formData.horaInicio.split(':')[0], formData.horaInicio.split(':')[1], 0);
     const horaFinDate = new Date();
     horaFinDate.setHours(formData.horaFin.split(':')[0], formData.horaFin.split(':')[1], 0);
+
+
+
+    const hoy = new Date();
+    // hoy.setDate(hoy.getDate()+1);
+
+    const anio = hoy.getFullYear();
+    const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+    const dia = String(hoy.getDate()).padStart(2, '0');
+
+    const horas = String(hoy.getHours()).padStart(2, '0');
+    const minutos = String(hoy.getMinutes()).padStart(2, '0');
+    const segundos = String(hoy.getSeconds()).padStart(2, '0');
+
+    let fechaHoy = `${anio}-${mes}-${dia}T${horas}:${minutos}:${segundos}`;
+    console.log(horaInicioDate)
+    console.log(horaFinDate)
+    console.log(fechaHoy)
+
+
     // Comparar las horas
     if(!errors.fechaReserva){
         if(formData.horaInicio == '' || formData.horaFin == ''){
             errors.horario = 'Debe especificar hora de inicio y fin.';
         }
-        if (horaFinDate < horaInicioDate) {
+        else if(horaFinDate < horaInicioDate) {
             errors.horario = 'La hora de fin no puede ser antes de la hora inicio.';
+        }
+        else if(horaInicioDate < fechaHoy) {
+            errors.horario = 'La hora de inicio no puede ser antes de la hora actual';
         }
     }
 
 
     return errors;
-};
-
-
-
-
-
-const formatearFecha = (fecha) => {
-    const anio = fecha.getFullYear();
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-    const dia = String(fecha.getDate()).padStart(2, '0');
-    return `${anio}-${mes}-${dia}`;
 };

@@ -35,6 +35,7 @@ const ModalEditarRecurso = ({setShowModalEditarRecurso,recursoEditar,reload,setR
                 .then((response) => {
                     if(response.succes){
                         console.log(response)
+                        alert("Recurso modificado correctamente.")
                         setShowModalEditarRecurso(false)
                         setReload(!reload)
                     }
