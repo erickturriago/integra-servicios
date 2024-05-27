@@ -111,17 +111,25 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
         let horaAux = horaInicio;
         let minutosAumento = recursoReservar.unidad.tiempoMinimo;
         let horasArr = []
+        
 
         if (tipo == 'inicio') {
             while(horaAux!==horaFin){
                 let reserva = null
+                const horaInicioDate = new Date();
+                horaInicioDate.setHours(horaAux.split(':')[0], horaAux.split(':')[1], 0);
+                const fechaHoraActual = new Date();
+
                 reserva = reservasRecurso.find((recurso)=>recurso.horaInicio==horaAux);
 
                 if(reserva){
                     horaAux=reserva.horaFin;
+                    
                 }
                 else{
-                    horasArr.push(horaAux);
+                    if(horaInicioDate>=fechaHoraActual){
+                        horasArr.push(horaAux);
+                    }
 
                     const [horas, minutos] = horaAux.split(':').map(Number);
                     let minutosTotales = horas * 60 + minutos;
