@@ -39,10 +39,23 @@ export const validarReservaForm = (formData,recursoReservar) => {
     //Validacion de horas
     //Horarios validación
     const horaInicioDate = new Date();
+    horaInicioDate.setFullYear(formData.fechaReserva.split("-")[0])
+    horaInicioDate.setMonth(formData.fechaReserva.split("-")[1]-1)
+    horaInicioDate.setDate(formData.fechaReserva.split("-")[2])
     horaInicioDate.setHours(formData.horaInicio.split(':')[0], formData.horaInicio.split(':')[1], 0);
+
     const horaFinDate = new Date();
+    horaFinDate.setFullYear(formData.fechaReserva.split("-")[0])
+    horaFinDate.setMonth(formData.fechaReserva.split("-")[1]-1)
+    horaFinDate.setDate(formData.fechaReserva.split("-")[2])
     horaFinDate.setHours(formData.horaFin.split(':')[0], formData.horaFin.split(':')[1], 0);
+    
     const fechaHoraActual = new Date();
+
+    console.log(horaInicioDate)
+    console.log(fechaHoraActual)
+
+
 
     // Comparar las horas
     if(!errors.fechaReserva){

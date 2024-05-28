@@ -134,6 +134,13 @@ const Reserva = () => {
                 <th>Usuario</th>
                 <th>Fecha Reserva</th>
                 <th>Fecha Creacion</th>
+                {
+                      state.userData && state.userData.rol=="ROLE_ADMIN" &&
+                      <>
+                        <th>Fecha Prestamo</th>
+                        <th>Fecha Devolucion</th>
+                      </>
+                    }
                 <th>Hora Inicio</th>
                 <th>Hora Fin</th>
                 <th>Estado</th>
@@ -150,6 +157,13 @@ const Reserva = () => {
                     <td>{reserva.usuario.fullname}</td>
                     <td>{reserva.fechaReserva}</td>
                     <td>{reserva.fechaCreacion}</td>
+                    {
+                      state.userData.rol=="ROLE_ADMIN" &&
+                      <>
+                        <td>{reserva.fechaPrestamo}</td>
+                        <td>{reserva.fechaDevolucion}</td>
+                      </>
+                    }
                     <td>{reserva.horaInicio}</td>
                     <td>{reserva.horaFin}</td>
                     {

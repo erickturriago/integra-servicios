@@ -199,7 +199,7 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
         getReservasRecurso(recursoReservar.id)
             .then((response) => {
                 if (response.succes) {
-                    setReservasRecurso(response.responseData.filter((r)=>r.estado=="Activa"))
+                    setReservasRecurso(response.responseData.filter((r)=>["Activa","Prestamo"].includes(r.estado)))
                 }
             })
         console.log(`formData: ${formData}`)
