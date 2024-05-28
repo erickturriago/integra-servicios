@@ -85,6 +85,14 @@ const NavBar = () => {
                     <Link name='recursos' to='/recursos' className={`option ${btnSelected['recursos']}`} id='recursosOption' onClick={handleClick} ><FontAwesomeIcon icon={faList} className='icono' />Recursos</Link>
                     <Link name='reservas' to='/reservas' className={`option ${btnSelected['reservas']}`} id='reservasOption' onClick={handleClick}><FontAwesomeIcon icon={faCalendarCheck} className='icono' />Reservas</Link>
                     {
+                        state.userData && state.userData.rol == 'ROLE_USER' &&
+                        <>
+                            <Link name='prestamos' to='/prestamos' className={`option ${btnSelected['prestamos']}`} id='prestamosOption' onClick={handleClick}><FontAwesomeIcon icon={faHandshake} className='icono' />Prestamos</Link>
+                            <Link name='devoluciones' to='/devoluciones' className={`option ${btnSelected['devoluciones']}`} id='devolucionesOption' onClick={handleClick}><FontAwesomeIcon icon={faRotateLeft} className='icono' />Devoluciones</Link>
+                        </>
+                        
+                    }
+                    {
                         state.userData && state.userData.rol == 'ROLE_ADMIN' &&
                         <>
                             <Link name='usuarios' to='/usuarios' className={`option ${btnSelected['usuarios']}`} id='usuariosOption' onClick={handleClick}><FontAwesomeIcon icon={faUsers} className='icono' />Usuarios</Link>
