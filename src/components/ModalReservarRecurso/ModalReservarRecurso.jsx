@@ -118,7 +118,18 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
                 let reserva = null
                 const horaInicioDate = new Date();
                 horaInicioDate.setHours(horaAux.split(':')[0], horaAux.split(':')[1], 0);
+                let fechaString = formatearFecha(currentDate);
+                console.log(fechaString)
+                horaInicioDate.setFullYear(fechaString.split("-")[0])
+                horaInicioDate.setMonth(parseInt(fechaString.split("-")[1])-1)
+                horaInicioDate.setDate(fechaString.split("-")[2])
+
+
                 const fechaHoraActual = new Date();
+                // fechaHoraActual.setDate(fechaHoraActual.getDate()+1);
+
+                console.log(horaInicioDate)
+                console.log(fechaHoraActual)
 
                 reserva = reservasRecurso.find((recurso)=>recurso.horaInicio==horaAux);
 
@@ -195,15 +206,10 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
     }, [horasInicio])
 
     useEffect(()=>{
-        console.log("useEffect current date");
-        console.log(recursoReservar);
-        const fechaActualDate = new Date(new Date().getTime() - (5 * 60 * 60 * 1000));
-        fechaActualDate.setHours(0, 0, 0, 0);
-        console.log(fechaActualDate)
+        const fechaActualDate = new Date();
 
         setCurrentDate(fechaActualDate);
         setFormData({ ...formData, 'fechaReserva':formatearFecha(fechaActualDate)})
-        console.log(formatearFecha(fechaActualDate));
 
     },[reservasRecurso])
 

@@ -4,7 +4,6 @@ export function registrarReserva (data) {
 const token = localStorage.getItem('token');
 
 const hoy = new Date();
-hoy.setDate(hoy.getDate()+1);
 
 const anio = hoy.getFullYear();
 const mes = String(hoy.getMonth() + 1).padStart(2, '0');
