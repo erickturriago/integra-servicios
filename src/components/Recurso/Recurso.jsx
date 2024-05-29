@@ -11,6 +11,7 @@ import ModalCrearRecurso from '../ModalCrearRecurso/ModalCrearRecurso'
 import ModalEditarRecurso from '../ModalEditarRecurso/ModalEditarRecurso'
 import ModalDetallesRecurso from '../ModalDetallesRecurso/ModalDetallesRecurso'
 import ModalReservarRecurso from '../ModalReservarRecurso/ModalReservarRecurso'
+import ModalCargarRecursosExternos from '../ModalCargarRecursosExternos/ModalCargarRecursosExternos'
 
 const Recursos = () => {
   const {state, dispatch} = useIntegraStates()
@@ -19,6 +20,7 @@ const Recursos = () => {
   const [showModalEditarRecurso,setShowModalEditarRecurso] = useState(false)
   const [showModalReservarRecurso, setShwoModalReservarRecurso] = useState(false)
   const [showModalDetallesRecurso,setShowDetallesRecurso] = useState(false)
+  const [showModalRecursosExternos,setShowModalRecursosExternos] = useState(false)
   const [recursoEditar,setRecursoEditar] = useState(undefined)
   const [recursoReservar, setRecursoReservar] = useState(undefined)
   const [recursoDetalles,setRecursoDetalles] = useState(undefined);
@@ -70,8 +72,15 @@ const Recursos = () => {
       {showModalEditarRecurso && <ModalEditarRecurso setShowModalEditarRecurso={setShowModalEditarRecurso} recursoEditar={recursoEditar} reload={reload} setReload={setReload}/>}
       {showModalDetallesRecurso && <ModalDetallesRecurso setShowDetallesRecurso={setShowDetallesRecurso} recursoDetalles={recursoDetalles}/>}
       {showModalReservarRecurso && <ModalReservarRecurso setShowModalReservarRecurso={setShwoModalReservarRecurso} recursoReservar={recursoReservar} reload={reload} setReload={setReload}/>}
+      {showModalRecursosExternos && <ModalCargarRecursosExternos setShowModalRecursosExternos={setShowModalRecursosExternos} reload={reload} setReload={setReload}/>}
       <div className='containerRecursos'>
-        <button onClick={()=>setShowModalCrearRecurso(true)}>Crear</button>
+        {
+          state.userData && state.userData.rol == "ROLE_ADMIN" &&
+          <div className='botones-recursos'>
+            <button onClick={()=>setShowModalCrearRecurso(true)}>Crear</button>
+            <button onClick={()=>setShowModalRecursosExternos(true)}>Cargar Externos</button>
+          </div>
+        }
         <div className='list-recursos'>
           <table className='table'>
             <thead>
