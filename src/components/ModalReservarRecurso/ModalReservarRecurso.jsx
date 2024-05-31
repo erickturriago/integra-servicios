@@ -103,7 +103,8 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
 
     const generarListaHorario = (tipo) => {
 
-        let horario = recursoReservar.horarioDisponible.find((horario)=>horario.dia.id == currentDate.getDay()==0?7:currentDate.getDay);
+        let numeroDiaActual = currentDate.getDay()==0?7:currentDate.getDay();
+        let horario = recursoReservar.horarioDisponible.find((horario)=>horario.dia.id == numeroDiaActual);
 
         let horaInicio = horario.horaInicio;
         let horaFin = horario.horaFin;
@@ -119,17 +120,12 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
                 const horaInicioDate = new Date();
                 horaInicioDate.setHours(horaAux.split(':')[0], horaAux.split(':')[1], 0);
                 let fechaString = formatearFecha(currentDate);
-                console.log(fechaString)
                 horaInicioDate.setFullYear(fechaString.split("-")[0])
                 horaInicioDate.setMonth(parseInt(fechaString.split("-")[1])-1)
                 horaInicioDate.setDate(fechaString.split("-")[2])
 
 
                 const fechaHoraActual = new Date();
-                // fechaHoraActual.setDate(fechaHoraActual.getDate()+1);
-
-                console.log(horaInicioDate)
-                console.log(fechaHoraActual)
 
                 reserva = reservasRecurso.find((recurso)=>recurso.horaInicio==horaAux);
 
@@ -228,6 +224,10 @@ const ModalReservarRecurso = ({ setShowModalReservarRecurso, recursoReservar, re
                     <div>
                         <label htmlFor="">Unidad</label>
                         <h5>{recursoReservar.unidad.nombre}</h5>
+                    </div>
+                    <div>
+                        <label htmlFor="">Dias Disponible</label>
+                        <h5>{recursoReservar.horarioDisponible.map(horario => horario.dia.nombre).join(', ')}</h5>
                     </div>
                     <div className={errors.fechaReserva ? 'error-field' : ''}>
                         <div className='containerCalendar'>

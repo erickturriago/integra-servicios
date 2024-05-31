@@ -44,15 +44,52 @@ const Reserva = () => {
 
   const agregarReservaActualizar = (e,reservaActualizar)=>{
     console.log(reservaActualizar)
-    let reserva = null
-    reserva = reservasActualizar.find((r)=>r.id==reservaActualizar.id)
-    if(!reserva){
-      let reservaCopia = {...reservaActualizar};
-      reservaCopia.estado = e.target.value;
-      // console.log(reservaCopia)
-      setReservasActualizar(prevState => [...prevState, reservaCopia]);
+    console.log(e.target.value)
+
+    setReservasActualizar(reservasActualizar.filter((r)=>r.id!=reservaActualizar.id));
+
+    let fechaHoy = new Date();
+
+    let fechaReservaInicio = new Date();
+    fechaReservaInicio.setFullYear(reservaActualizar.fechaReserva.split('-')[0]);
+    fechaReservaInicio.setMonth(reservaActualizar.fechaReserva.split('-')[1]-1);
+    fechaReservaInicio.setDate(reservaActualizar.fechaReserva.split('-')[2]);
+    fechaReservaInicio.setHours(reservaActualizar.horaInicio.split(':')[0], reservaActualizar.horaInicio.split(':')[1], 0);
+
+    let fechaReservaFin = new Date();
+    fechaReservaFin.setFullYear(reservaActualizar.fechaReserva.split('-')[0]);
+    fechaReservaFin.setMonth(reservaActualizar.fechaReserva.split('-')[1]-1);
+    fechaReservaFin.setDate(reservaActualizar.fechaReserva.split('-')[2]);
+    fechaReservaFin.setHours(reservaActualizar.horaFin.split(':')[0], reservaActualizar.horaFin.split(':')[1], 0);
+
+    let reservaCopia = {...reservaActualizar};
+    reservaCopia.estado = e.target.value;
+
+    let reservasDelRecurso = state.reservasList.filter((r)=>r.recurso.id==reservaActualizar.recurso.id);
+
+    if(reservaActualizar.estado=="Activa" && e.target.value == "Prestamo"){
+      if(fechaHoy<fechaReservaInicio){
+        alert("El prestamo se debe realizar en las horas indicadas en la reserva")
+        return;
+      }
+      else if(reservasDelRecurso.some((r)=>r.estado=="Prestamo")){
+        alert("El recurso ya se encuentra en prestamo en otra reserva.")
+        return;
+      }
+      
     }
+
+    if(reservaActualizar.estado=="Prestamo" && e.target.value == "Devolucion"){
+      if(fechaHoy>fechaReservaFin){
+        alert("La devolución se está realizando se forma tardía. Podría ser sancionado");
+      }
+    }
+
+    setReservasActualizar(prevState => [...prevState, reservaCopia]);
+
     console.log(reservasActualizar)
+
+      
   }
 
   const handleUpdateReserva = (e,reservaClick)=>{
@@ -77,8 +114,9 @@ const Reserva = () => {
     const horas = String(hoy.getHours()).padStart(2, '0');
     const minutos = String(hoy.getMinutes()).padStart(2, '0');
     const segundos = String(hoy.getSeconds()).padStart(2, '0');
-
     let fechaHoy = `${anio}-${mes}-${dia}T${horas}:${minutos}:${segundos}`;
+
+    console.log(mes)
 
     if(reservaUpdate.estado=="Prestamo"){
       form.fechaPrestamo = fechaHoy;
@@ -87,7 +125,7 @@ const Reserva = () => {
       form.fechaDevolucion = fechaHoy;
     }
 
-    if(confirm("¿Está seguro de editar la unidad?")){
+    if(confirm("¿Está seguro de cambiar el estado de la reserva?")){
       actualizarReserva(form)
       .then((response)=>{
         if(response.success){

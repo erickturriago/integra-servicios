@@ -9,6 +9,7 @@ const initialState = {
     token:null,
     userData:null,
     recursosList:[],
+    otrosRecursosList:[],
     unidadesList:[],
     reservasList:[],
     prestamosList:[],

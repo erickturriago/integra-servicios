@@ -14,6 +14,7 @@ import { ContextProvider } from './components/utils/global.Context';
 import ProtectedRoute from './components/utils/ProtectedRoute';
 import Prestamo from './components/Prestamo/Prestamo';
 import Devoluciones from './components/Devoluciones/Devoluciones';
+import OtrosRecursos from './components/OtrosRecursos/OtrosRecursos';
 
 function App() {
   const [showNavBar, setShowNavBar] = useState(true)
@@ -35,6 +36,7 @@ function App() {
             <Route element={<NavBar />}>
               <Route path='/info-usuario' element={<InfoUsuario />}></Route>
               <Route path="/recursos" element={<Recursos/>}></Route>
+              <Route path="/otrosRecursos" element={<OtrosRecursos/>}></Route>
               <Route path="/reservas" element={<Reserva/>}></Route>
               <Route path="/prestamos" element={<Prestamo/>}></Route>
               <Route path="/devoluciones" element={<Devoluciones/>}></Route>

@@ -30,7 +30,7 @@ const Unidades = () => {
   }
 
   const handleDelete =  (idUnidad)=>{
-    if(confirm("¿Está seguro de eliminar el recurso?")){
+    if(confirm("¿Está seguro de eliminar la unidad?")){
       deleteUnidad(idUnidad)
       .then((response)=>{
         if(response.success){
@@ -67,6 +67,8 @@ const Unidades = () => {
                 <th>Tipo</th>
                 <th>Apertura</th>
                 <th>Cierre</th>
+                <th>T. min</th>
+                <th>T. max</th>
                 <th>Dias disponible</th>
                 <th></th>
                 <th></th>
@@ -80,6 +82,8 @@ const Unidades = () => {
                     <td>{unidad.tipo}</td>
                     <td>{unidad.horaInicio}</td>
                     <td>{unidad.horaFinal}</td>
+                    <td>{unidad.tiempoMinimo}</td>
+                    <td>{unidad.tiempoMaximo}</td>
                     <td>{unidad.diasDisponibles.map((dia, index) => index === unidad.diasDisponibles.length - 1 ? dia.nombre : dia.nombre + ', ')}</td>
                     <td><FontAwesomeIcon onClick={()=>{setIdUnidadEditar(unidad.id);setShowModalUnidad(true);}} icon={faPencil} className='reserva-icon'/></td>
                     <td><FontAwesomeIcon onClick={()=>handleDelete(unidad.id)} icon={faTrashCan} className='reserva-icon'/></td>

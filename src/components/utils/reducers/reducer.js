@@ -6,6 +6,8 @@ export const reducer = (state, action) => {
             return {...state, userData: action.payload}
         case 'SET_LIST_RECURSOS': 
             return {...state, recursosList: action.payload}
+        case 'SET_LIST_OTROS_RECURSOS': 
+            return {...state, otrosRecursosList: action.payload}
         case 'SET_LIST_UNIDADES': 
             return {...state, unidadesList: action.payload}
         case 'SET_LIST_RESERVAS':

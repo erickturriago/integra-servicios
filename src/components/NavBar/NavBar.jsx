@@ -11,7 +11,7 @@ import { faHandshake } from '@fortawesome/free-solid-svg-icons'
 import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
-import { faCubes } from '@fortawesome/free-solid-svg-icons'
+import { faCubes,faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import { useIntegraStates } from '../utils/global.Context'
 
@@ -20,6 +20,7 @@ const NavBar = () => {
     const [btnSelected,setBtnSelected] = useState({
         "info-usuario": "unselected",
         "recursos": "unselected",
+        "otrosRecursos": "unselected",
         "reservas": "unselected",
         "prestamos": "unselected",
         "devoluciones": "unselected",
@@ -83,6 +84,10 @@ const NavBar = () => {
                 <ul className="nav__links">
                     <Link name='info-usuario' to='/info-usuario' className={`option ${btnSelected['info-usuario']}`} id='userOption' onClick={handleClick} ><FontAwesomeIcon icon={faUser} className='icono'/>Mi cuenta</Link>
                     <Link name='recursos' to='/recursos' className={`option ${btnSelected['recursos']}`} id='recursosOption' onClick={handleClick} ><FontAwesomeIcon icon={faList} className='icono' />Recursos</Link>
+                    {
+                        state.userData && state.userData.rol == 'ROLE_USER' &&
+                        <Link name='otrosRecursos' to='/otrosRecursos' className={`option ${btnSelected['otrosRecursos']}`} id='otrosRecursosOption' onClick={handleClick} ><FontAwesomeIcon icon={faEllipsis} className='icono' />Otros Recursos</Link>
+                    }
                     <Link name='reservas' to='/reservas' className={`option ${btnSelected['reservas']}`} id='reservasOption' onClick={handleClick}><FontAwesomeIcon icon={faCalendarCheck} className='icono' />Reservas</Link>
                     {
                         state.userData && state.userData.rol == 'ROLE_USER' &&
